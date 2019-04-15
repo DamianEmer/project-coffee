@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CoffeeSaleApp</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="sign_up_text">Aun no eres miembro</string>
+    <string name="sign_up_btn">Registrate ahora!</string>
+    <string name="title_app">Coffee Sale</string>
 </resources>
