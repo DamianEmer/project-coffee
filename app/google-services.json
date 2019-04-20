@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "737577485656",
+    "firebase_url": "https://coffee-sale.firebaseio.com",
+    "project_id": "coffee-sale",
+    "storage_bucket": "coffee-sale.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737577485656:android:df8befc22fd1d2c4",
+        "android_client_info": {
+          "package_name": "com.dezc.coffeesaleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737577485656-p82c5avb3g4vp7hsd9a8o11hh95127t5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dezc.coffeesaleapp",
+            "certificate_hash": "a0490c022473b54fe638d120f7ae852917460b12"
+          }
+        },
+        {
+          "client_id": "737577485656-d5ke3jjcs342la3j7r8a5da0ddmup815.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Fso86XeEN-MyKWtbOAv7Rz8ZCaMNQd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737577485656-d5ke3jjcs342la3j7r8a5da0ddmup815.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
