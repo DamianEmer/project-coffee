@@ -1,21 +1,26 @@
-package com.dezc.coffeesaleapp.activities;
+package com.dezc.coffeesaleapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.dezc.coffeesaleapp.R;
+import com.dezc.coffeesaleapp.activities.DetailProductActivity;
+import com.dezc.coffeesaleapp.activities.MyProductRecyclerViewAdapter;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -24,6 +29,9 @@ import java.util.List;
  * interface.
  */
 public class ProductFragment extends Fragment {
+
+    //private ProductListener productListener;
+    //private Button productBtn;
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -38,6 +46,7 @@ public class ProductFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public ProductFragment() {
+
     }
 
     // TODO: Customize parameter initialization
@@ -62,6 +71,8 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
+        View view2 = inflater.inflate(R.layout.fragment_product, container, false);
+
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -72,13 +83,12 @@ public class ProductFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            mAdapter = new MyProductRecyclerViewAdapter(new ArrayList<DummyItem>(), mListener);
+            mAdapter = new MyProductRecyclerViewAdapter(this, new ArrayList<DummyItem>(), mListener);
             recyclerView.setAdapter(mAdapter);
         }
         mAdapter.setItems(DummyContent.ITEMS);
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -111,4 +121,5 @@ public class ProductFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
     }
+
 }

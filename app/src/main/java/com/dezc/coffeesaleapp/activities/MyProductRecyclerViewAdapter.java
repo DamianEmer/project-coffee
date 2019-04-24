@@ -1,12 +1,19 @@
 package com.dezc.coffeesaleapp.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.dezc.coffeesaleapp.activities.ProductFragment.OnListFragmentInteractionListener;
+import com.dezc.coffeesaleapp.fragments.ProductFragment;
+import com.dezc.coffeesaleapp.fragments.ProductFragment.OnListFragmentInteractionListener;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
 import com.dezc.coffeesaleapp.R;
 
@@ -20,10 +27,12 @@ import java.util.List;
  */
 public class MyProductRecyclerViewAdapter extends RecyclerView.Adapter<MyProductRecyclerViewAdapter.ViewHolder> {
 
+    private ProductFragment mContext;
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyProductRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyProductRecyclerViewAdapter(ProductFragment context, List<DummyItem> items, OnListFragmentInteractionListener listener) {
+        mContext = context;
         mValues = items;
         mListener = listener;
     }
@@ -48,6 +57,14 @@ public class MyProductRecyclerViewAdapter extends RecyclerView.Adapter<MyProduct
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
+                    Toast.makeText(
+                            mContext.getContext(), "Elemento clickeado: " + holder.mItem, Toast.LENGTH_LONG).show();
+
+                    Intent intentDetailProduct = new Intent(mContext.getContext(), DetailProductActivity.class);
+                    intentDetailProduct.putExtra("ID Product", mValues.get(position).id);
+                    intentDetailProduct.putExtra("Content Product", mValues.get(position).content);
+                    mContext.startActivity(intentDetailProduct);
+
                 }
             }
         });
