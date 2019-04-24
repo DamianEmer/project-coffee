@@ -10,7 +10,7 @@ import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN_TIME = 4500;
+    private static int SPLASH_SCREEN_TIME = 1200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
