@@ -78,12 +78,13 @@
         tools:text="@string/test_description_detail_product" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_addCart"
         android:layout_width="197dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:background="@color/orangePrimary"
+        android:onClick="addCart"
         android:text="@string/add_cart_btn"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
