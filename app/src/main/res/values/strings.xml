@@ -1,9 +1,33 @@
 <resources>
     <string name="app_name">CoffeeSaleApp</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
     <string name="login">Iniciar sesión</string>
-    <string name="sign_up_text">Aun no eres miembro</string>
-    <string name="sign_up_btn">Registrate ahora!</string>
+    <string name="signUp_text">Aun no eres miembro</string>
+    <string name="signUp_btn">Registrate</string>
+    <string name="singUpFinish_btn">Registrarse ahora!</string>
     <string name="title_app">Coffee Sale</string>
+
+    <string name="email_input">Correo electronico</string>
+    <string name="password_input">Contraseña</string>
+    <string name="name_input">Nombre(s)</string>
+    <string name="lastname_input">Apellido paterno</string>
+    <string name="secondLastname_input">Apellido Materno</string>
+    <string name="numberWhatsapp_input">Número de WhatsApp</string>
+    <string name="profilePicture_txt">Selecciona una foto de perfil</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="tab_text_1">Productos</string>
+    <string name="tab_text_2">Carrito</string>
+    <string name="tab_text_3">Perfil</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_name_profile">Damian Emerson Zamora Celiseo</string>
+    <string name="test_number_profile">2711224784</string>
+    <string name="test_email_profile">emer.dzc@gmail.com</string>
+
+    <string name="test_name_detail_product">Product Name</string>
+    <string name="test_description_detail_product">Description product</string>
+    <string name="test_price_detail_product">Price</string>
+    <string name="add_cart_btn">Agregar a carrito</string>
 </resources>

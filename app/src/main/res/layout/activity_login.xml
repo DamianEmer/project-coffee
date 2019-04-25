@@ -8,14 +8,14 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layout_input_email"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:focusable="true"
@@ -24,16 +24,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <EditText
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:autofillHints="email"
-            android:hint="@string/email"
             android:drawablePadding="50dp"
+            android:hint="@string/email_input"
             android:inputType="textEmailAddress"
             android:textSize="20sp" />
     </android.support.design.widget.TextInputLayout>
@@ -56,20 +55,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:autofillHints="password"
-            android:hint="@string/password"
+            android:hint="@string/password_input"
             android:inputType="text|textPassword"
             android:textSize="20sp" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginBtn"
         android:layout_width="233dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/orangePrimary"
         android:hint="Iniciar sesion"
+        android:onClick="loginUser"
         android:text="@string/login"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,11 +79,12 @@
         tools:text="@string/login" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="204dp"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
-        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +92,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="125sp"
-            android:layout_height="125sp"
+            android:layout_width="166dp"
+            android:layout_height="147dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/cup" />
 
@@ -111,11 +114,11 @@
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
-        android:text="@string/sign_up_text"
+        android:text="@string/signUp_text"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:text="@string/sign_up_text" />
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        tools:text="@string/signUp_text" />
 
     <Button
         android:id="@+id/button2"
@@ -123,11 +126,14 @@
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/sign_up_btn"
+        android:background="@android:color/white"
+        android:onClick="onRegisterNow"
+        android:text="@string/signUp_btn"
+        android:textColor="@color/blue"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        tools:text="@string/sign_up_btn" />
+        tools:text="@string/signUp_btn" />
 
 </android.support.constraint.ConstraintLayout>
