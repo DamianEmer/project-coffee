@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.fragments;
+package com.dezc.coffeesaleapp.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dezc.coffeesaleapp.R;
-import com.dezc.coffeesaleapp.fragments.WishFragment.OnListFragmentInteractionListener;
 import com.dezc.coffeesaleapp.models.Product;
 
 import java.util.List;

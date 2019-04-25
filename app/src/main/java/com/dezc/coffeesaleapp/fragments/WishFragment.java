@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dezc.coffeesaleapp.R;
+import com.dezc.coffeesaleapp.adapters.MyWishRecyclerViewAdapter;
 import com.dezc.coffeesaleapp.fragments.dummy.DummyContent;
 import com.dezc.coffeesaleapp.models.Product;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
