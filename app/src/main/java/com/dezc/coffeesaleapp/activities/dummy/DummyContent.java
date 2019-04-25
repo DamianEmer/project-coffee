@@ -1,5 +1,7 @@
 package com.dezc.coffeesaleapp.activities.dummy;
 
+import com.dezc.coffeesaleapp.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,7 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 15;
 
     static {
         // Add some sample items.

@@ -1,5 +1,6 @@
 package com.dezc.coffeesaleapp.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,11 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
+import com.dezc.coffeesaleapp.fragments.ProductFragment;
+import com.dezc.coffeesaleapp.fragments.ProfileFragment;
+import com.dezc.coffeesaleapp.fragments.WishFragment;
 
-public class HomeActivity extends AppCompatActivity implements ProductFragment.OnListFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements ProductFragment.OnListFragmentInteractionListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -149,9 +154,9 @@ public class HomeActivity extends AppCompatActivity implements ProductFragment.O
                 case 0:
                     return ProductFragment.newInstance();
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return WishFragment.newInstance();
                 default:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return ProfileFragment.newInstance();
             }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
