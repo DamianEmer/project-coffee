@@ -25,6 +25,7 @@ import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
 import com.dezc.coffeesaleapp.fragments.ProductFragment;
 import com.dezc.coffeesaleapp.fragments.ProfileFragment;
+import com.dezc.coffeesaleapp.fragments.WishFragment;
 
 public class HomeActivity extends AppCompatActivity implements ProductFragment.OnListFragmentInteractionListener{
 
@@ -153,7 +154,7 @@ public class HomeActivity extends AppCompatActivity implements ProductFragment.O
                 case 0:
                     return ProductFragment.newInstance();
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return WishFragment.newInstance();
                 default:
                     return ProfileFragment.newInstance();
             }
