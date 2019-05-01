@@ -9,6 +9,7 @@ public class Client {
     private String numberWhatsapp;
     private String email;
     private String password;
+    private String profilePhoto;
 
     public Client (){
 
@@ -23,13 +24,14 @@ public class Client {
         this.email = email;
     }
 
-    public Client(String name, String lastname, String secondLastname, String numberWhatsapp, String email, String password) {
+    public Client(String name, String lastname, String secondLastname, String numberWhatsapp, String email, String password, String profilePhoto) {
         this.name = name;
         this.lastname = lastname;
         this.secondLastname = secondLastname;
         this.numberWhatsapp = numberWhatsapp;
         this.email = email;
         this.password = password;
+        this.profilePhoto = profilePhoto;
     }
 
     public long getClientId() {
@@ -86,5 +88,13 @@ public class Client {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 }

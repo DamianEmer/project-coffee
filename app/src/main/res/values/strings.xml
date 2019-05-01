@@ -6,6 +6,8 @@
     <string name="singUpFinish_btn">Registrarse ahora!</string>
     <string name="title_app">Coffee Sale</string>
 
+    <string name="profile_photo_text">Cargar una foto de perfil</string>
+    <string name="profile_photo_btn">Seleccionar...</string>
     <string name="email_input">Correo electronico</string>
     <string name="password_input">Contraseña</string>
     <string name="name_input">Nombre(s)</string>
