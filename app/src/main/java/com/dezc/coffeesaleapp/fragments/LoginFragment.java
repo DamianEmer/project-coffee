@@ -1,21 +1,18 @@
 package com.dezc.coffeesaleapp.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.SignUpActivity;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,8 +89,7 @@ public class LoginFragment extends Fragment implements TextWatcher {
         if (context instanceof EmailChanged && context instanceof PasswordChanged) {
             mListener = (EmailChanged) context;
             pListener = (PasswordChanged) context;
-        }else
-         {
+        } else {
             throw new RuntimeException(context.toString()
                     + " must implement EmailChanged");
         }
@@ -118,15 +114,14 @@ public class LoginFragment extends Fragment implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         if (mListener != null && pListener != null) {
-            if(s == email.getEditableText()){
+            if (s == email.getEditableText()) {
                 mListener.onEmailChanged(s.toString());
-            }else if(s == password.getEditableText()){
+            } else if (s == password.getEditableText()) {
                 pListener.onPasswordChanged(s.toString());
             }
         }
 
     }
-
 
 
     public interface EmailChanged {

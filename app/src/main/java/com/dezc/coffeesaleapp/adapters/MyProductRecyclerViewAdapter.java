@@ -1,18 +1,19 @@
 package com.dezc.coffeesaleapp.adapters;
 
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.DetailProductActivity;
+import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
 import com.dezc.coffeesaleapp.fragments.ProductFragment;
 import com.dezc.coffeesaleapp.fragments.ProductFragment.OnListFragmentInteractionListener;
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
-import com.dezc.coffeesaleapp.R;
 
 import java.util.Collection;
 import java.util.List;

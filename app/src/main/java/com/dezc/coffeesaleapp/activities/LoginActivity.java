@@ -1,8 +1,6 @@
 package com.dezc.coffeesaleapp.activities;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,10 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dezc.coffeesaleapp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,34 +42,31 @@ public class LoginActivity extends AppCompatActivity {
         emailL = email.getText().toString();
         passwordL = password.getText().toString();
 
-        if(TextUtils.isEmpty(emailL) && TextUtils.isEmpty(passwordL)){
+        if (TextUtils.isEmpty(emailL) && TextUtils.isEmpty(passwordL)) {
             Toast.makeText(getApplicationContext(), "Ingresa tus datos", Toast.LENGTH_LONG).show();
-        }else {
+        } else {
 /*
         if(){
             Toast.makeText(getApplicationContext(), "Debes ingresar tu contraseña", Toast.LENGTH_LONG);
         }*/
 
             mAuth.signInWithEmailAndPassword(emailL, passwordL)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_LONG).show();
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_LONG).show();
 
-                                Intent intentHome = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intentHome);
-                                finish();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_LONG).show();
-                            }
+                            Intent intentHome = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intentHome);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Datos incorrectos", Toast.LENGTH_LONG).show();
                         }
                     });
 
         }
     }
 
-    public void initUI(){
+    public void initUI() {
         email = findViewById(R.id.input_email);
         password = findViewById(R.id.input_password);
         loginBtn = findViewById(R.id.loginBtn);
