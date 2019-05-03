@@ -2,9 +2,10 @@ package com.dezc.coffeesaleapp.networks;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.dezc.coffeesaleapp.interfaces.ClientDAO;
 import com.dezc.coffeesaleapp.models.Client;
@@ -28,7 +29,7 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public void onSaveClient(Client client, Context context, Uri imageUri) {
-        if(imageUri != null) {
+        if (imageUri != null) {
             auth.createUserWithEmailAndPassword(client.getEmail(), client.getPassword())
                     .addOnSuccessListener((AuthResult authResult) -> {
 
@@ -60,7 +61,7 @@ public class ClientDAOImpl implements ClientDAO {
                 Toast.makeText(context, "ERROR AL REGISTRARSE", Toast.LENGTH_LONG).show();
                 Log.i("ClientDAOImpl", "Error" + f.getLocalizedMessage(), f.fillInStackTrace());
             });
-        }else{
+        } else {
             Toast.makeText(context, "Datos vacios", Toast.LENGTH_SHORT).show();
         }
     }

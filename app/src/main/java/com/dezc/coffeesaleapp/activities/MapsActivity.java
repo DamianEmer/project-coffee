@@ -1,11 +1,12 @@
 package com.dezc.coffeesaleapp.activities;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.dezc.coffeesaleapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         nextButton = (Button) findViewById(R.id.next_button);
 
-        nextButton.setOnClickListener(new View.OnClickListener(){
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("PaymentActivity: ", "Siguiente sección (Tipo de pago)");
