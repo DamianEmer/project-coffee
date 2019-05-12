@@ -17,9 +17,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
-import com.dezc.coffeesaleapp.fragments.ProductFragment;
-import com.dezc.coffeesaleapp.fragments.ProfileFragment;
-import com.dezc.coffeesaleapp.fragments.WishFragment;
+import com.dezc.coffeesaleapp.ui.components.ProductFragment;
+import com.dezc.coffeesaleapp.ui.components.ProfileFragment;
+import com.dezc.coffeesaleapp.ui.components.WishFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;

@@ -62,6 +62,7 @@ public class ClientDAOImpl implements ClientDAO {
                 Log.i("ClientDAOImpl", "Error" + f.getLocalizedMessage(), f.fillInStackTrace());
             });
         } else {
+
             Toast.makeText(context, "Datos vacios", Toast.LENGTH_SHORT).show();
         }
     }

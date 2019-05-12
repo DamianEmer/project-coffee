@@ -9,7 +9,7 @@ buildscript {
     ext.androidx_version = '1.0.0-rc02'
     ext.google_services = '4.2.0'
     ext.room_version = '2.1.0-alpha04'
-    ext.room_version_07 = '2.1.0-alpha07'
+    ext.room_version_beta = '2.1.0-beta01'
     repositories {
         google()
         jcenter()

@@ -1,10 +1,13 @@
-package com.dezc.coffeesaleapp.fragments;
+package com.dezc.coffeesaleapp.ui.components;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,11 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dezc.coffeesaleapp.R;
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
-import com.dezc.coffeesaleapp.adapters.MyProductRecyclerViewAdapter;
-
-import java.util.ArrayList;
+import com.dezc.coffeesaleapp.activities.MapsActivity;
+import com.dezc.coffeesaleapp.adapters.MyWishRecyclerViewAdapter;
+import com.dezc.coffeesaleapp.fragments.dummy.DummyContent;
+import com.dezc.coffeesaleapp.models.Product;
 
 /**
  * A fragment representing a list of Items.
@@ -24,31 +26,28 @@ import java.util.ArrayList;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ProductFragment extends Fragment {
-
-    //private ProductListener productListener;
-    //private Button productBtn;
+public class WishFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    public static final MyWishRecyclerViewAdapter myWishRecyclerViewAdapter = new MyWishRecyclerViewAdapter(DummyContent.ITEMS);
 
-    private MyProductRecyclerViewAdapter mAdapter;
+    private Button btnSale;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ProductFragment() {
-
+    public WishFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ProductFragment newInstance() {
-        ProductFragment fragment = new ProductFragment();
+    public static WishFragment newInstance() {
+        WishFragment fragment = new WishFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -66,9 +65,17 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-        View view2 = inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_wish_list, container, false);
 
+        btnSale = view.findViewById(R.id.buttonSale);
+        btnSale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("WishFragment: ", "Clicked in the button...");
+                Intent intentMap = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intentMap);
+            }
+        });
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -79,43 +86,14 @@ public class ProductFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            mAdapter = new MyProductRecyclerViewAdapter(this, new ArrayList<DummyItem>(), mListener);
-            recyclerView.setAdapter(mAdapter);
+            //myWishRecyclerViewAdapter = new MyWishRecyclerViewAdapter(DummyContent.ITEMS);
+            recyclerView.setAdapter(myWishRecyclerViewAdapter);
         }
-        mAdapter.setItems(DummyContent.ITEMS);
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Product item);
     }
-
 }

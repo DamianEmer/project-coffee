@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.dezc.coffeesaleapp.R;
-import com.dezc.coffeesaleapp.fragments.WishFragment;
+import com.dezc.coffeesaleapp.ui.components.WishFragment;
 import com.dezc.coffeesaleapp.fragments.dummy.DummyContent;
 import com.dezc.coffeesaleapp.models.Product;
 
