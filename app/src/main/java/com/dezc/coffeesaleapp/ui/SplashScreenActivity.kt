@@ -7,7 +7,6 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.activities.HomeActivity
 import com.dezc.coffeesaleapp.functions.getInteger
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth

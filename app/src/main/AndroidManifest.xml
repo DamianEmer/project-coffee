@@ -25,6 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/AppTheme.LoginScreen" />
+
+        <activity
+            android:name=".ui.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".activities.PaymentActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -42,17 +56,6 @@
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.DetailProductActivity" />
-
-        <activity
-            android:name=".activities.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ui.LoginActivity" android:theme="@style/AppTheme.LoginScreen"/>
     </application>
 
 </manifest>

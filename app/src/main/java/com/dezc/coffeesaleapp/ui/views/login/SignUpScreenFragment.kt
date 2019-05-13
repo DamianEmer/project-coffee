@@ -29,7 +29,7 @@ class SignUpScreenFragment : Fragment() {
 
     private var password: String = ""
 
-    private var mLoginViewModel: LoginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
+    private lateinit var mLoginViewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = FragmentSignUpScreenBinding.inflate(inflater)
@@ -38,6 +38,7 @@ class SignUpScreenFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mLoginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
         mLoginViewModel.loginLoading.observe(this, Observer<Boolean> { mBinding.loading = it })
         mLoginViewModel.progress.observe(this, Observer<Int> { mBinding.progress = it })
     }
@@ -53,17 +54,6 @@ class SignUpScreenFragment : Fragment() {
         private var progressBar: ProgressBar? = null
 
         private val clientDaoImpl = ClientDAOImpl()
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            // setContentView(R.layout.activity_sign_up)
-
-            // chooseImageButton = findViewById<Button>(R.id.chooseButton)
-            // profilePhoto = findViewById<ImageView>(R.id.profilePhotoimageView)
-            // progressBar = findViewById<ProgressBar>(R.id.signUpProgressBar)
-
-            chooseImageButton!!.setOnClickListener { openFileChooser() }
-        }
     */
 
 /*
@@ -153,10 +143,5 @@ class SignUpScreenFragment : Fragment() {
 
     fun onExistingAccount(view: View) {
         Navigation.findNavController(view).navigate(R.id.action_signUpScreenFragment_to_loginScreenFragment)
-    }
-
-    fun emailAndPassword(email: String = this.email, password: String = this.password) {
-        this.email = email
-        this.password = password
     }
 }

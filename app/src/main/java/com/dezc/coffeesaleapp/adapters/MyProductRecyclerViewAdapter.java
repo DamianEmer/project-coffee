@@ -13,7 +13,7 @@ import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.activities.DetailProductActivity;
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem;
 import com.dezc.coffeesaleapp.ui.components.ProductFragment;
-import com.dezc.coffeesaleapp.ui.components.ProductFragment.OnListFragmentInteractionListener;
+import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListener;
 
 import java.util.Collection;
 import java.util.List;

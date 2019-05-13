@@ -44,6 +44,9 @@ class LoginScreenFragment : Fragment() {
             Toast.makeText(context, "Ingresa tus datos", Toast.LENGTH_LONG).show()
             email_input_edit_text.error = "El campo email no puede ir vacio"
         } else {
+            mLoginViewModel.login(email, password) {
+                // Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_nav_home)
+            }
         }
     }
 }

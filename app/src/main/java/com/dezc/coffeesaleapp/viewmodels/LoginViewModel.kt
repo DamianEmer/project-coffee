@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dezc.coffeesaleapp.models.Client
 import com.google.android.gms.tasks.OnCanceledListener
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -27,15 +28,15 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
 
     val progress: MutableLiveData<Int> = MutableLiveData()
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String, successCallback: (AuthResult?) -> Unit) {
         loginLoading.postValue(true)
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCanceledListener(this)
                 .addOnFailureListener(this)
-                .addOnSuccessListener { }
+                .addOnSuccessListener { successCallback(it) }
     }
 
-    fun signUp(client: Client, imageUri: Uri) {
+    fun signUp(client: Client, imageUri: Uri, successCallback: () -> Unit) {
         loginLoading.postValue(true)
         mAuth.createUserWithEmailAndPassword(client.email, client.password)
                 .addOnCanceledListener(this)
@@ -48,6 +49,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
                             .addOnSuccessListener { }
                     mClientsStorageReference.child(it.user.uid)
                             .putFile(imageUri)
+                            .addOnProgressListener { }
+                            .addOnSuccessListener { }
                 }
     }
 
