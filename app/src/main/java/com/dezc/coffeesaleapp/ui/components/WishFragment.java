@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.fragments;
+package com.dezc.coffeesaleapp.ui.components;
 
 import android.content.Context;
 import android.content.Intent;

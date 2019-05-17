@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">CoffeeSaleApp</string>
     <string name="login">Iniciar sesión</string>
-    <string name="signUp_text">Aun no eres miembro</string>
-    <string name="signUp_btn">Registrate</string>
-    <string name="singUpFinish_btn">Registrarse ahora!</string>
+    <string name="sign_up_text">Aun no eres miembro</string>
+    <string name="sign_up_btn">Registrate</string>
+    <string name="singUpFinish_btn">Registrarse ahora</string>
     <string name="title_app">Coffee Sale</string>
+    <string name="welcome">Welcome to Coffee Sale</string>
+    <string name="existing_account">Ya tengo una cuenta</string>
+    <string name="description_logo">Logo</string>
+    <string name="description_profile">Profile</string>
 
     <string name="profile_photo_text">Cargar una foto de perfil</string>
-    <string name="profile_photo_btn">Seleccionar...</string>
+    <string name="profile_photo_btn">Seleccionar…</string>
     <string name="email_input">Correo electronico</string>
     <string name="password_input">Contraseña</string>
     <string name="name_input">Nombre(s)</string>

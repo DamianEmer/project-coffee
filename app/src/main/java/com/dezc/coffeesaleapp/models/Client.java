@@ -1,34 +1,38 @@
 package com.dezc.coffeesaleapp.models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Client {
 
     private long clientId;
     private String name;
-    private String lastname;
-    private String secondLastname;
-    private String numberWhatsapp;
+    private String lastName;
+    private String secondLastName;
+    private String numberWhatsApp;
     private String email;
+    @Exclude
     private String password;
     private String profilePhoto;
 
-    public Client (){
-
+    public Client() {
     }
 
-    public Client(String name, String lastname, String secondLastname, String numberWhatsapp,
+    public Client(String name, String lastname, String secondLastName, String numberWhatsApp,
                   String email) {
         this.name = name;
-        this.lastname = lastname;
-        this.secondLastname = secondLastname;
-        this.numberWhatsapp = numberWhatsapp;
+        this.lastName = lastname;
+        this.secondLastName = secondLastName;
+        this.numberWhatsApp = numberWhatsApp;
         this.email = email;
     }
 
-    public Client(String name, String lastname, String secondLastname, String numberWhatsapp, String email, String password, String profilePhoto) {
+    public Client(String name, String lastname, String secondLastName, String numberWhatsApp, String email, String password, String profilePhoto) {
         this.name = name;
-        this.lastname = lastname;
-        this.secondLastname = secondLastname;
-        this.numberWhatsapp = numberWhatsapp;
+        this.lastName = lastname;
+        this.secondLastName = secondLastName;
+        this.numberWhatsApp = numberWhatsApp;
         this.email = email;
         this.password = password;
         this.profilePhoto = profilePhoto;
@@ -50,28 +54,28 @@ public class Client {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getSecondLastname() {
-        return secondLastname;
+    public String getSecondLastName() {
+        return secondLastName;
     }
 
-    public void setSecondLastname(String secondLastname) {
-        this.secondLastname = secondLastname;
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
-    public String getNumberWhatsapp() {
-        return numberWhatsapp;
+    public String getNumberWhatsApp() {
+        return numberWhatsApp;
     }
 
-    public void setNumberWhatsapp(String numberWhatsapp) {
-        this.numberWhatsapp = numberWhatsapp;
+    public void setNumberWhatsApp(String numberWhatsApp) {
+        this.numberWhatsApp = numberWhatsApp;
     }
 
     public String getEmail() {
