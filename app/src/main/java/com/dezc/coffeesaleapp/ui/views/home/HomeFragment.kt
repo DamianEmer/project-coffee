@@ -9,12 +9,12 @@ import com.dezc.coffeesaleapp.activities.dummy.DummyContent
 import com.dezc.coffeesaleapp.databinding.FragmentHomeBinding
 import com.dezc.coffeesaleapp.functions.getSupportFragmentManager
 import com.dezc.coffeesaleapp.functions.setSupportActionBar
-import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListener
+import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(), OnListFragmentInteractionListener {
+class HomeFragment : Fragment(){
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -40,6 +40,4 @@ class HomeFragment : Fragment(), OnListFragmentInteractionListener {
         }
     }
 
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-    }
 }

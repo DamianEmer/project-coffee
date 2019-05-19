@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.models.Product
-import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListener
+import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
 import com.google.firebase.database.*
 
 import java.util.ArrayList
@@ -38,7 +38,7 @@ class ProductFragment : Fragment() {
 
     // TODO: Customize parameters
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
+    private var mListener: OnProductClickListener? = null
 
     private var mAdapter: ProductRecyclerViewAdapter? = null
 
@@ -97,10 +97,10 @@ class ProductFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is OnProductClickListener) {
             mListener = context
         } else {
-            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnProductClickListener")
         }
     }
 
