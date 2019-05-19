@@ -1,6 +1,6 @@
 package com.dezc.coffeesaleapp.ui.utils.callback;
 
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
+import com.dezc.coffeesaleapp.models.Product;
 
 /**
  * This interface must be implemented by activities that contain this
@@ -12,7 +12,6 @@ import com.dezc.coffeesaleapp.activities.dummy.DummyContent;
  * "http://developer.android.com/training/basics/fragments/communicating.html"
  * >Communicating with Other Fragments</a> for more information.
  */
-public interface OnListFragmentInteractionListener {
-
-    void onListFragmentInteraction(DummyContent.DummyItem item);
+public interface OnProductClickListener {
+    void onProductClickListener(Product item);
 }

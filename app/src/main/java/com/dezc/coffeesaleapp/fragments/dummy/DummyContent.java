@@ -27,21 +27,21 @@ public class DummyContent {
 
     private static final int COUNT = 3;
 
-    static {
+    /*static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
         }
     }
-
+/*
     public static void addItem(Product item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getId(), item);
     }
 
     private static Product createDummyItem(int position) {
-        return new Product(String.valueOf(position), "Product " + position, "$"+position);
-    }
+        return new Product(position, "Product " + position, "$"+position);
+    }*/
 
 
 
