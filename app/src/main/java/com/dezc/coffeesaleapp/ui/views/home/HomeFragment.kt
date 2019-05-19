@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent
 import com.dezc.coffeesaleapp.databinding.FragmentHomeBinding
 import com.dezc.coffeesaleapp.functions.getSupportFragmentManager
 import com.dezc.coffeesaleapp.functions.setSupportActionBar
-import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment() {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 

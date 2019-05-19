@@ -13,14 +13,14 @@ val COL_NAME = "name"
 val COL_PRICE = "price"
 val COL_DESCRIPTION = "description"
 
-class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, 1){
+class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createTable =" CREATE TABLE " + TABLE_NAME + " ( "+
-                COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_ID_PRODUCT + " INTEGER, "+
+        val createTable = " CREATE TABLE " + TABLE_NAME + " ( " +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_ID_PRODUCT + " INTEGER, " +
                 COL_NAME + " TEXT, " +
-                COL_PRICE + " TEXT, "+
+                COL_PRICE + " TEXT, " +
                 COL_DESCRIPTION + " TEXT ); "
 
         db?.execSQL(createTable);
@@ -30,7 +30,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
 
     }
 
-    fun addProductToCart(){
+    fun addProductToCart() {
 
     }
 

@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.dezc.coffeesaleapp.R;
-import com.dezc.coffeesaleapp.ui.utils.callback.EmailChanged;
-import com.dezc.coffeesaleapp.ui.utils.callback.PasswordChanged;
+import com.dezc.coffeesaleapp.ui.utils.callbacks.EmailChanged;
+import com.dezc.coffeesaleapp.ui.utils.callbacks.PasswordChanged;
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity implements EmailChanged, PasswordChanged {

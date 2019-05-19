@@ -11,7 +11,7 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> ProductFragment.newInstance()
+            0 -> ProductFragment()
             1 -> WishFragment.newInstance()
             else -> ProfileFragment()
         }

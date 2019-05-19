@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.utils.callback;
+package com.dezc.coffeesaleapp.ui.utils.callbacks;
 
 import com.dezc.coffeesaleapp.models.Product;
 

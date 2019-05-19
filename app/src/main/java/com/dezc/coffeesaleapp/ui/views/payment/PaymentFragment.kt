@@ -1,5 +1,6 @@
 package com.dezc.coffeesaleapp.ui.views.payment
 
+import android.R.layout.simple_spinner_dropdown_item
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import androidx.fragment.app.Fragment
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentPaymentBinding
 import kotlinx.android.synthetic.main.fragment_payment.*
-import android.R.layout.simple_spinner_dropdown_item
 
 class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 

@@ -6,7 +6,7 @@ import com.dezc.coffeesaleapp.BR
 
 class Product() : BaseObservable() {
 
-    constructor(id: Int, name: String, price: String, description: String) : this() {
+    constructor(id: Int, name: String, price: Int, description: String) : this() {
         this.id = id
         this.name = name
         this.price = price
@@ -28,7 +28,7 @@ class Product() : BaseObservable() {
         }
 
     @get:Bindable
-    var price: String = ""
+    var price: Int = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.price)

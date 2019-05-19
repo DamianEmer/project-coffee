@@ -9,7 +9,7 @@ import androidx.navigation.Navigation;
 
 import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.models.Product;
-import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener;
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener;
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel;
 
 public class HomeActivity extends AppCompatActivity implements OnProductClickListener {
@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity implements OnProductClickLis
     }
 
     @Override
-    public void onProductClickListener(Product item){
+    public void onProductClickListener(Product item) {
         mViewModel.getProduct().postValue(item);
         Navigation.findNavController(this, R.id.nav_host_home).navigate(R.id.action_homeFragment_to_detailProductFragment);
     }
