@@ -54,8 +54,8 @@ public class DetailProductActivity extends AppCompatActivity {
 
     public void addCart(View view) {
         Toast.makeText(this, "Agregado al carrito", Toast.LENGTH_LONG).show();
-        DummyContent.addItem(new Product("001", "Producto nuevo", "x"));
-        WishFragment.myWishRecyclerViewAdapter.notifyItemInserted(DummyContent.ITEMS.size() + 1);
+        //DummyContent.addItem(new Product("001", "Producto nuevo", "x"));
+        WishFragment.Companion.getMyWishRecyclerViewAdapter().notifyItemInserted(DummyContent.ITEMS.size() + 1);
     }
 
 }
