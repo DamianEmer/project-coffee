@@ -1,6 +1,5 @@
-package com.dezc.coffeesaleapp.ui.components
+package com.dezc.coffeesaleapp.ui.views.wish
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.activities.MapsActivity
-import com.dezc.coffeesaleapp.adapters.MyWishRecyclerViewAdapter
+import com.dezc.coffeesaleapp.ui.views.maps.MapsFragment
 import com.dezc.coffeesaleapp.fragments.dummy.DummyContent
 import com.dezc.coffeesaleapp.models.Product
 
@@ -53,7 +51,7 @@ class WishFragment : Fragment() {
         btnSale = view.findViewById(R.id.buttonSale)
         btnSale!!.setOnClickListener {
             Log.d("WishFragment: ", "Clicked in the button...")
-            val intentMap = Intent(activity, MapsActivity::class.java)
+            val intentMap = Intent(activity, MapsFragment::class.java)
             startActivity(intentMap)
         }
 
@@ -65,7 +63,7 @@ class WishFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            //myWishRecyclerViewAdapter = new MyWishRecyclerViewAdapter(DummyContent.ITEMS);
+            //myWishRecyclerViewAdapter = new WishRecyclerViewAdapter(DummyContent.ITEMS);
             view.adapter = myWishRecyclerViewAdapter
         }
         return view
@@ -80,7 +78,7 @@ class WishFragment : Fragment() {
 
         // TODO: Customize parameter argument names
         private val ARG_COLUMN_COUNT = "column-count"
-        val myWishRecyclerViewAdapter = MyWishRecyclerViewAdapter(DummyContent.ITEMS)
+        val myWishRecyclerViewAdapter = WishRecyclerViewAdapter(DummyContent.ITEMS)
 
         // TODO: Customize parameter initialization
         fun newInstance(): WishFragment {

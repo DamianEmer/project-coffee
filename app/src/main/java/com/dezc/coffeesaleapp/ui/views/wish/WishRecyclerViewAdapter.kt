@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.adapters
+package com.dezc.coffeesaleapp.ui.views.wish
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.dezc.coffeesaleapp.models.Product
 /**
  * [RecyclerView.Adapter] that can display a [Product]
  */
-class MyWishRecyclerViewAdapter(items: List<Product>) : RecyclerView.Adapter<MyWishRecyclerViewAdapter.ViewHolder>() {
+class WishRecyclerViewAdapter(items: List<Product>) : RecyclerView.Adapter<WishRecyclerViewAdapter.ViewHolder>() {
 
     init {
         mValues = items

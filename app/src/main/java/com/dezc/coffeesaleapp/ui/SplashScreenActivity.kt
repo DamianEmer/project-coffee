@@ -20,7 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             startActivity(Intent(this@SplashScreenActivity,
-                    if (FirebaseAuth.getInstance()?.currentUser != null) HomeActivity::class.java
+                    if (FirebaseAuth.getInstance()?.currentUser == null) HomeActivity::class.java
                     else LoginActivity::class.java))
         }, getInteger(R.integer.splash_screen_time).toLong())
     }

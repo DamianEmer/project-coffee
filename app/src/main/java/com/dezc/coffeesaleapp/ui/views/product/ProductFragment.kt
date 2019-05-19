@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.components
+package com.dezc.coffeesaleapp.ui.views.product
 
 import android.content.Context
 import android.os.Bundle
@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem
-import com.dezc.coffeesaleapp.adapters.MyProductRecyclerViewAdapter
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListener
 import com.google.firebase.database.*
@@ -43,7 +40,7 @@ class ProductFragment : Fragment() {
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
 
-    private var mAdapter: MyProductRecyclerViewAdapter? = null
+    private var mAdapter: ProductRecyclerViewAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +79,7 @@ class ProductFragment : Fragment() {
                                     mColumnCount <= 1 -> LinearLayoutManager(context)
                                     else -> GridLayoutManager(context, mColumnCount)
                                 }
-                                mAdapter = MyProductRecyclerViewAdapter(
+                                mAdapter = ProductRecyclerViewAdapter(
                                         this@ProductFragment,
                                         productList,
                                         mListener)

@@ -1,19 +1,15 @@
-package com.dezc.coffeesaleapp.adapters
+package com.dezc.coffeesaleapp.ui.views.product
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 
 import androidx.recyclerview.widget.RecyclerView
 
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.activities.DetailProductActivity
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem
 import com.dezc.coffeesaleapp.models.Product
-import com.dezc.coffeesaleapp.ui.components.ProductFragment
 import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListener
 
 /**
@@ -21,11 +17,11 @@ import com.dezc.coffeesaleapp.ui.utils.callback.OnListFragmentInteractionListene
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyProductRecyclerViewAdapter(
+class ProductRecyclerViewAdapter(
         private val mContext: ProductFragment,
         private val mValues: MutableList<Product>,
         private val mListener: OnListFragmentInteractionListener?
-) : RecyclerView.Adapter<MyProductRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -47,7 +43,7 @@ class MyProductRecyclerViewAdapter(
                 Toast.makeText(
                         mContext.context, "Elemento clickeado: " + holder.mItem!!, Toast.LENGTH_LONG).show()
 
-                val intentDetailProduct = Intent(mContext.context, DetailProductActivity::class.java)
+                val intentDetailProduct = Intent(mContext.context, DetailProductFragment::class.java)
                 intentDetailProduct.putExtra("ID Product", mValues[position].id)
                 intentDetailProduct.putExtra("Content Product", mValues[position].content)
                 mContext.startActivity(intentDetailProduct)
