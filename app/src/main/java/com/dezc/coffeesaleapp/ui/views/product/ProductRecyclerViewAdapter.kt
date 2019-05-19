@@ -13,6 +13,8 @@ import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -21,9 +23,9 @@ import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
  */
 class ProductRecyclerViewAdapter(
         private val mContext: ProductFragment,
-        private val mValues: MutableList<Product>,
+        options: FirebaseRecyclerOptions<Product>,
         private val mListener: OnProductClickListener?
-) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
+) : FirebaseRecyclerAdapter<Product, ProductRecyclerViewAdapter.ViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -31,11 +33,11 @@ class ProductRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mItem = mValues[position]
-        holder.mIdView.text = item.id.toString()
-        holder.mContentView.text = item.name
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, product: Product) {
+
+        holder.mItem = product
+        holder.mIdView.text = product.id.toString()
+        holder.mContentView.text = product.name
 
         holder.mView.setOnClickListener {
             if (null != mListener) {
@@ -47,15 +49,6 @@ class ProductRecyclerViewAdapter(
             }
         }
     }
-
-    override fun getItemCount(): Int {
-        return mValues.size
-    }
-
-    /*fun setItems(items: Collection<DummyItem>) {
-        mValues.clear()
-        mValues.addAll(items)
-    }*/
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView
