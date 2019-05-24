@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentMapsBinding
 import com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -35,8 +37,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     fun onNext(view: View) {
         Log.d("PaymentFragment: ", "Siguiente sección (Tipo de pago)")
-        val paymentIntent = Intent(context, PaymentFragment::class.java)
-        startActivity(paymentIntent)
+        Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_paymentFragment);
     }
 
 

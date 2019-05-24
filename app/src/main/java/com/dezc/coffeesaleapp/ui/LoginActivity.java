@@ -1,9 +1,12 @@
 package com.dezc.coffeesaleapp.ui;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.ui.utils.callbacks.EmailChanged;

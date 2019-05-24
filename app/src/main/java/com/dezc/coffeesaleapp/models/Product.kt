@@ -6,7 +6,7 @@ import com.dezc.coffeesaleapp.BR
 
 class Product() : BaseObservable() {
 
-    constructor(id: Int, name: String, price: Int, description: String) : this() {
+    constructor(id: Int = 0, name: String = "", price: Int = 0, description: String = "") : this() {
         this.id = id
         this.name = name
         this.price = price

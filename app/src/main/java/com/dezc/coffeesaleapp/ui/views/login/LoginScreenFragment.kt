@@ -2,9 +2,11 @@ package com.dezc.coffeesaleapp.ui.views.login
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,8 +14,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentLoginScreenBinding
+import com.dezc.coffeesaleapp.ui.LoginActivity
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login_screen.*
 
 class LoginScreenFragment : Fragment() {
 
@@ -22,8 +27,15 @@ class LoginScreenFragment : Fragment() {
     private lateinit var mLoginViewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        //val view = inflater.inflate(R.layout.fragment_login_screen, container, false)
         mBinding = FragmentLoginScreenBinding.inflate(inflater)
         mBinding.context = this
+
+        mBinding.loginButton.setOnClickListener {
+            Navigation.findNavController(this.view!!).navigate(R.id.action_loginScreenFragment_to_nav_home)
+            Log.i("LoginScreenFragment: ","Click")
+        }
+
         return mBinding.root
     }
 
@@ -45,7 +57,7 @@ class LoginScreenFragment : Fragment() {
             email_input_edit_text.error = "El campo email no puede ir vacio"
         } else {
             mLoginViewModel.login(email, password) {
-                // Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_nav_home)
+                 Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_nav_home)
             }
         }
     }

@@ -79,7 +79,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{context::loginUser}"
+            android:onClick="loginUser"
             android:text="@string/login"
             android:visibility="@{loading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
