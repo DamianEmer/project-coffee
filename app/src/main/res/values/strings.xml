@@ -10,6 +10,7 @@
     <string name="description_logo">Logo</string>
     <string name="description_profile">Profile</string>
     <string name="dollar">$</string>
+    <string name="action_logout">Logout</string>
 
     <string name="profile_photo_text">Cargar una foto de perfil</string>
     <string name="profile_photo_btn">Seleccionar…</string>

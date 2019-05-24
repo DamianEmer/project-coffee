@@ -16,8 +16,8 @@
             android:id="@+id/action_loginScreenFragment_to_signUpScreenFragment"
             app:destination="@id/signUpScreenFragment" />
         <action
-            android:id="@+id/action_loginScreenFragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_loginScreenFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/signUpScreenFragment"
@@ -28,8 +28,12 @@
             android:id="@+id/action_signUpScreenFragment_to_loginScreenFragment"
             app:destination="@id/loginScreenFragment" />
         <action
-            android:id="@+id/action_signUpScreenFragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_signUpScreenFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
-    <include app:graph="@navigation/nav_home" />
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.dezc.coffeesaleapp.ui.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
 </navigation>
