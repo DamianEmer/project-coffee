@@ -7,8 +7,9 @@
     tools:context=".ui.components.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/email_text_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">
@@ -24,8 +25,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/password_text_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">

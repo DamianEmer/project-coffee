@@ -24,15 +24,17 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="204dp"
+            android:layout_width="415dp"
+            android:layout_height="248dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/colorPrimary">
 
                 <ImageView
                     android:id="@+id/image_view_logo"
@@ -40,6 +42,7 @@
                     android:layout_height="147dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
                     android:contentDescription="@string/description_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -47,10 +50,13 @@
                     app:srcCompat="@drawable/cup" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="343dp"
+                    android:layout_height="41dp"
                     android:layout_gravity="bottom|center_vertical"
-                    android:text="@string/login"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:text="@string/description_logo"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
@@ -66,19 +72,22 @@
             android:name="com.dezc.coffeesaleapp.ui.components.LoginFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:layout="@layout/fragment_login" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:onClick="@{context::onSignIn}"
             android:text="@string/login"
             android:visibility="@{loading ? View.INVISIBLE : View.VISIBLE}"
@@ -88,14 +97,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_up_button"
-            style="@style/Widget.MaterialComponents.Button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/colorBackground"
             android:onClick="@{context::onRegisterNow}"
             android:text="@string/sign_up_btn"
+            android:textColor="@android:color/black"
             android:visibility="@{loading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,10 +118,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:visibility="@{loading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_group" />
 
@@ -119,7 +130,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.35" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Bienvenido"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
