@@ -1,0 +1,29 @@
+package com.dezc.coffeesaleapp.ui.bindings
+
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
+import androidx.databinding.BindingAdapter
+import com.dezc.coffeesaleapp.models.Validator
+
+object InputValidator {
+
+    @BindingAdapter("textValidators", "errorMessage")
+    @JvmStatic
+    fun EditText.addEditTextValidators(validators: List<Validator>, errorMessage: String) {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (!validators.all { it(s.toString()) }) {
+                    error = errorMessage
+                    requestFocus()
+                }
+            }
+        })
+    }
+}

@@ -14,6 +14,9 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentSignUpScreenBinding
+import com.dezc.coffeesaleapp.models.Validator
+import com.dezc.coffeesaleapp.models.emailValidator
+import com.dezc.coffeesaleapp.models.whatsAppNumberValidator
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_sign_up_screen.*
 
@@ -28,6 +31,10 @@ class SignUpScreenFragment : Fragment() {
     private var email: String = ""
 
     private var password: String = ""
+
+    private var emailValidators: List<Validator> = arrayListOf(emailValidator)
+
+    private var whatsAppValidators: List<Validator> = arrayListOf(whatsAppNumberValidator)
 
     private lateinit var mLoginViewModel: LoginViewModel
 
@@ -57,23 +64,6 @@ class SignUpScreenFragment : Fragment() {
     */
 
 /*
-    private fun validateInputEmail(email: String?): Boolean {
-        val emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"
-        val pattern = Pattern.compile(emailPattern)
-        if (email != null) {
-            val matcher = pattern.matcher(email)
-            if (matcher.matches()) {
-                return true
-            } else {
-                Toast.makeText(this, "Email no válido", Toast.LENGTH_SHORT).show()
-                return false
-            }
-        } else {
-            Toast.makeText(this, "Inserte un correo eléctronico", Toast.LENGTH_LONG).show()
-            return false
-        }
-    }
-
     private fun validateInputPassword(password: String?): Boolean {
         if (password != null) {
             if (password.length >= 8) {
@@ -88,19 +78,7 @@ class SignUpScreenFragment : Fragment() {
         }
     }
 
-    private fun validateInputNumberWhatsApp(numberWhatsApp: String?): Boolean {
-        if (numberWhatsApp != null) {
-            if (numberWhatsApp.length == 10) {
-                return true
-            } else {
-                Toast.makeText(this, "Número invalido", Toast.LENGTH_SHORT).show()
-                return false
-            }
-        } else {
-            Toast.makeText(this, "Ingrese un número de Whatsapp", Toast.LENGTH_LONG).show()
-            return false
-        }
-    }*/
+   */
 
     fun onSaveClient(view: View) {
         /*val date = Date()

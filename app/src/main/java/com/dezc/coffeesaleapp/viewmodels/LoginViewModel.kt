@@ -40,7 +40,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
                 .addOnSuccessListener { successCallback(it)  }
     }
 
-    fun signUp(client: Client, imageUri: Uri, successCallback: () -> Unit) {
+    fun signUp(client: Client, imageUri: Uri, progressCallback: () -> Unit) {
         loginLoading.postValue(true)
         mAuth.createUserWithEmailAndPassword(client.email, client.password)
                 .addOnCanceledListener(this)

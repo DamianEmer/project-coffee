@@ -94,11 +94,11 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline5">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/nameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -113,11 +113,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/lastnameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -132,11 +132,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/secondLastnameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -151,16 +151,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:id="@+id/whatsappNumberTextInputLayout"
+                    android:id="@+id/whatAppNumberTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/whatsappNumberInputEditText"
+                        android:id="@+id/whatsAppNumberInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
