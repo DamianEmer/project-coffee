@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.bindings
+package com.dezc.coffeesaleapp.functions
 
 import android.text.Editable
 import android.text.TextWatcher

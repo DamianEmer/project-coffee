@@ -20,7 +20,7 @@ import com.dezc.coffeesaleapp.types.Validators
 import com.dezc.coffeesaleapp.types.emailValidator
 import com.dezc.coffeesaleapp.types.passwordValidator
 import com.dezc.coffeesaleapp.types.whatsAppNumberValidator
-import com.dezc.coffeesaleapp.ui.bindings.addEditTextValidators
+import com.dezc.coffeesaleapp.functions.addEditTextValidators
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up_screen.*
