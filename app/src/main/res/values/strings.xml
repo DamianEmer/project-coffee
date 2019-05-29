@@ -11,6 +11,7 @@
     <string name="description_profile">Profile</string>
     <string name="dollar">$</string>
     <string name="action_logout">Logout</string>
+    <string name="required_field">El %1$s es requerido</string>
 
     <string name="profile_photo_text">Cargar una foto de perfil</string>
     <string name="profile_photo_btn">Seleccionar…</string>
