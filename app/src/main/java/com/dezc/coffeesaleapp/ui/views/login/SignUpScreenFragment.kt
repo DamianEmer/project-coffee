@@ -14,7 +14,15 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentSignUpScreenBinding
+import com.dezc.coffeesaleapp.functions.isNotEmpty
+import com.dezc.coffeesaleapp.models.Client
+import com.dezc.coffeesaleapp.types.Validators
+import com.dezc.coffeesaleapp.types.emailValidator
+import com.dezc.coffeesaleapp.types.passwordValidator
+import com.dezc.coffeesaleapp.types.whatsAppNumberValidator
+import com.dezc.coffeesaleapp.functions.addEditTextValidators
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_sign_up_screen.*
 
 class SignUpScreenFragment : Fragment() {
@@ -23,11 +31,13 @@ class SignUpScreenFragment : Fragment() {
 
     private val PICK_IMAGE_REQUEST = 1
 
-    private var imageUri: Uri? = null
+    private lateinit var imageUri: Uri
 
-    private var email: String = ""
+    private var emailValidators: Validators = arrayListOf(emailValidator)
 
-    private var password: String = ""
+    private var whatsAppValidators: Validators = arrayListOf(whatsAppNumberValidator)
+
+    private var passwordValidators: Validators = arrayListOf(passwordValidator(8))
 
     private lateinit var mLoginViewModel: LoginViewModel
 
@@ -40,89 +50,25 @@ class SignUpScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mLoginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
         mLoginViewModel.loginLoading.observe(this, Observer<Boolean> { mBinding.loading = it })
-        mLoginViewModel.progress.observe(this, Observer<Int> { mBinding.progress = it })
+        mLoginViewModel.signUpProgress.observe(this, Observer<Int> { mBinding.progress = it })
+        whatsAppNumberInputEditText.addEditTextValidators(whatsAppValidators, getString(R.string.required_field, "número"))
+        password_input_edit_text.addEditTextValidators(passwordValidators, getString(R.string.required_field, "password"))
+        email_input_edit_text.addEditTextValidators(emailValidators, getString(R.string.required_field, "email"))
     }
-
-    /*
-        private var name: TextView? = null
-        private var lastname: TextView? = null
-        private var secondaLastname: TextView? = null
-        private var numberWhatsapp: TextView? = null
-
-        private var chooseImageButton: Button? = null
-        private var profilePhoto: ImageView? = null
-        private var progressBar: ProgressBar? = null
-
-        private val clientDaoImpl = ClientDAOImpl()
-    */
-
-/*
-    private fun validateInputEmail(email: String?): Boolean {
-        val emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"
-        val pattern = Pattern.compile(emailPattern)
-        if (email != null) {
-            val matcher = pattern.matcher(email)
-            if (matcher.matches()) {
-                return true
-            } else {
-                Toast.makeText(this, "Email no válido", Toast.LENGTH_SHORT).show()
-                return false
-            }
-        } else {
-            Toast.makeText(this, "Inserte un correo eléctronico", Toast.LENGTH_LONG).show()
-            return false
-        }
-    }
-
-    private fun validateInputPassword(password: String?): Boolean {
-        if (password != null) {
-            if (password.length >= 8) {
-                return true
-            } else {
-                Toast.makeText(this, "La contraseña debe ser mayor a 8 caracteres", Toast.LENGTH_LONG).show()
-                return false
-            }
-        } else {
-            Toast.makeText(this, "Ingrese una password", Toast.LENGTH_SHORT).show()
-            return false
-        }
-    }
-
-    private fun validateInputNumberWhatsApp(numberWhatsApp: String?): Boolean {
-        if (numberWhatsApp != null) {
-            if (numberWhatsApp.length == 10) {
-                return true
-            } else {
-                Toast.makeText(this, "Número invalido", Toast.LENGTH_SHORT).show()
-                return false
-            }
-        } else {
-            Toast.makeText(this, "Ingrese un número de Whatsapp", Toast.LENGTH_LONG).show()
-            return false
-        }
-    }*/
 
     fun onSaveClient(view: View) {
-        /*val date = Date()
-        // name = findViewById<TextView>(R.id.nameInputEditText)
-        // lastname = findViewById<TextView>(R.id.lastnameInputEditText)
-        // secondaLastname = findViewById<TextView>(R.id.secondLastnameInputEditText)
-        // numberWhatsapp = findViewById<TextView>(R.id.whatsappNumberInputEditText)
-        val client = Client(
-                name!!.text.toString(),
-                lastname!!.text.toString(),
-                secondaLastname!!.text.toString(),
-                numberWhatsapp!!.text.toString(),
-                email,
-                password,
-                if (imageUri != null) imageUri!!.toString() else ""
-        )
+        if (email_input_edit_text.isNotEmpty() && password_input_edit_text.isNotEmpty() && ::imageUri.isLateinit) {
+            mLoginViewModel.signUp(Client(nameInputEditText.text.toString(),
+                    lastnameInputEditText.text.toString(), secondLastnameInputEditText.text.toString(),
+                    whatsAppNumberInputEditText.text.toString(), email_input_edit_text.text.toString(),
+                    password_input_edit_text.text.toString()), imageUri, onSignUp(view))
+        }
+    }
 
-        if (validateInputEmail(email) && validateInputPassword(password)
-                && validateInputNumberWhatsapp(numberWhatsapp!!.text.toString())) {
-            //   clientDaoImpl.onSaveClient(client, getApplicationContext(), imageUri)
-        }*/
-
+    private fun onSignUp(view: View): (Void) -> Unit {
+        return {
+            Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_homeActivity)
+        }
     }
 
     fun openFileChooser(view: View) {
@@ -135,8 +81,7 @@ class SignUpScreenFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
                 && data != null && data.data != null) {
-            imageUri = data.data
-
+            imageUri = data.data!!
             Glide.with(this).load(imageUri).into(profile_photo_image_view)
         }
     }

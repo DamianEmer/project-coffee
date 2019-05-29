@@ -19,23 +19,32 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String lastname, String secondLastName, String numberWhatsApp,
+    public Client(String name, String lastName, String secondLastName, String numberWhatsApp,
                   String email) {
         this.name = name;
-        this.lastName = lastname;
+        this.lastName = lastName;
         this.secondLastName = secondLastName;
         this.numberWhatsApp = numberWhatsApp;
         this.email = email;
     }
 
-    public Client(String name, String lastname, String secondLastName, String numberWhatsApp, String email, String password, String profilePhoto) {
+    public Client(String name, String lastName, String secondLastName, String numberWhatsApp, String email, String password, String profilePhoto) {
         this.name = name;
-        this.lastName = lastname;
+        this.lastName = lastName;
         this.secondLastName = secondLastName;
         this.numberWhatsApp = numberWhatsApp;
         this.email = email;
         this.password = password;
         this.profilePhoto = profilePhoto;
+    }
+
+    public Client(String name, String lastName, String secondLastName, String numberWhatsApp, String email, String password) {
+        this.name = name;
+        this.lastName = lastName;
+        this.secondLastName = secondLastName;
+        this.numberWhatsApp = numberWhatsApp;
+        this.email = email;
+        this.password = password;
     }
 
     public long getClientId() {

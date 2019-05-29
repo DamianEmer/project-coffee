@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.dezc.coffeesaleapp.models.Client
+import com.dezc.coffeesaleapp.ui.utils.callbacks.CompleteCallback
 import com.google.android.gms.tasks.OnCanceledListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.AuthResult
@@ -26,35 +27,48 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
 
     val loginLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    val progress: MutableLiveData<Int> = MutableLiveData()
-
-    val userCurrent: MutableLiveData<Client> by lazy {
-        MutableLiveData<Client>()
-    }
+    val signUpProgress: MutableLiveData<Int> = MutableLiveData()
 
     fun login(email: String, password: String, successCallback: (AuthResult?) -> Unit) {
         loginLoading.postValue(true)
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCanceledListener(this)
                 .addOnFailureListener(this)
-                .addOnSuccessListener { successCallback(it)  }
+                .addOnSuccessListener { successCallback(it) }
     }
 
-    fun signUp(client: Client, imageUri: Uri, successCallback: () -> Unit) {
+    fun signUp(client: Client, imageUri: Uri, completeCallback: CompleteCallback<Void>) {
         loginLoading.postValue(true)
         mAuth.createUserWithEmailAndPassword(client.email, client.password)
                 .addOnCanceledListener(this)
                 .addOnFailureListener(this)
-                .addOnSuccessListener {
-                    mClientsDatabaseReference.child(it.user.uid)
-                            .setValue(client)
-                            .addOnCanceledListener(this)
-                            .addOnFailureListener(this)
-                            .addOnSuccessListener { }
-                    mClientsStorageReference.child(it.user.uid)
-                            .putFile(imageUri)
-                            .addOnProgressListener { }
-                            .addOnSuccessListener { }
+                .addOnSuccessListener { authResult ->
+                    signUpProgress.postValue(30)
+                    val storageReference = mClientsStorageReference.child(authResult.user.uid)
+                    storageReference.putFile(imageUri)
+                            .addOnProgressListener { taskSnapshot ->
+                                signUpProgress.postValue(signUpProgress
+                                        .value?.plus((30 * (100.0 * taskSnapshot.bytesTransferred) /
+                                        taskSnapshot.totalByteCount).toInt()))
+                            }
+                            .continueWithTask { task ->
+                                if (!task.isSuccessful) {
+                                    throw task.exception!!
+                                }
+                                storageReference.downloadUrl
+                            }
+                            .addOnSuccessListener { uriTask ->
+                                client.profilePhoto = uriTask.toString()
+                                mClientsDatabaseReference.child(authResult.user.uid)
+                                        .setValue(client)
+                                        .addOnCanceledListener(this)
+                                        .addOnFailureListener(this)
+                                        .addOnSuccessListener {
+                                            signUpProgress.postValue(signUpProgress
+                                                    .value?.plus(30) ?: 30)
+                                            completeCallback(it)
+                                        }
+                            }
                 }
     }
 
