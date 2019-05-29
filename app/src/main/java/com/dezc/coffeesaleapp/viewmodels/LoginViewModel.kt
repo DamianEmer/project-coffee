@@ -28,12 +28,16 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
 
     val progress: MutableLiveData<Int> = MutableLiveData()
 
+    val userCurrent: MutableLiveData<Client> by lazy {
+        MutableLiveData<Client>()
+    }
+
     fun login(email: String, password: String, successCallback: (AuthResult?) -> Unit) {
         loginLoading.postValue(true)
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCanceledListener(this)
                 .addOnFailureListener(this)
-                .addOnSuccessListener { successCallback(it) }
+                .addOnSuccessListener { successCallback(it)  }
     }
 
     fun signUp(client: Client, imageUri: Uri, successCallback: () -> Unit) {

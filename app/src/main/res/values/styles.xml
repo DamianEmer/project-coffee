@@ -30,8 +30,10 @@
         <item name="cardBackgroundColor">@color/darkGray</item>
     </style>
 
-    <style name="AppTheme.InputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="AppTheme.InputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:background">@color/white</item>
     </style>
+
+
 
 </resources>
