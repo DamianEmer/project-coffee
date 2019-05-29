@@ -1,21 +1,22 @@
 package com.dezc.coffeesaleapp.ui.views.maps
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-
+import androidx.navigation.Navigation
+import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentMapsBinding
+import com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
-import com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment
-import android.content.Intent
-import android.util.Log
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
@@ -36,8 +37,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     fun onNext(view: View) {
         Log.d("PaymentFragment: ", "Siguiente sección (Tipo de pago)")
-        val paymentIntent = Intent(context, PaymentFragment::class.java)
-        startActivity(paymentIntent)
+        Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_paymentFragment);
     }
 
 

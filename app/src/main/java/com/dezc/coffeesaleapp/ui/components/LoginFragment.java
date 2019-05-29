@@ -13,8 +13,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.dezc.coffeesaleapp.R;
-import com.dezc.coffeesaleapp.ui.utils.callback.EmailChanged;
-import com.dezc.coffeesaleapp.ui.utils.callback.PasswordChanged;
+import com.dezc.coffeesaleapp.ui.utils.callbacks.EmailChanged;
+import com.dezc.coffeesaleapp.ui.utils.callbacks.PasswordChanged;
 
 import org.jetbrains.annotations.NotNull;
 

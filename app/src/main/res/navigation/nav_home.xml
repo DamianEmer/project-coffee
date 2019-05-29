@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailProductFragment"
             app:destination="@id/detailProductFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginActivity2"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -40,4 +43,9 @@
         android:id="@+id/detailProductFragment"
         android:name="com.dezc.coffeesaleapp.ui.views.product.DetailProductFragment"
         android:label="DetailProductFragment" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.dezc.coffeesaleapp.ui.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

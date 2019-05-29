@@ -32,11 +32,10 @@ class LoginScreenFragment : Fragment() {
         mLoginViewModel.loginLoading.observe(this, Observer<Boolean> { mBinding.loading = it })
     }
 
-    fun onRegisterNow(view: View) {
-        Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_signUpScreenFragment)
-    }
+    fun onRegisterNow(view: View) =
+            Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_signUpScreenFragment)
 
-    fun loginUser(view: View) {
+    fun onSignIn(view: View) {
         val email = email_input_edit_text.text.toString()
         val password = password_input_edit_text.text.toString()
 
@@ -45,7 +44,7 @@ class LoginScreenFragment : Fragment() {
             email_input_edit_text.error = "El campo email no puede ir vacio"
         } else {
             mLoginViewModel.login(email, password) {
-                // Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_nav_home)
+                Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_homeActivity)
             }
         }
     }

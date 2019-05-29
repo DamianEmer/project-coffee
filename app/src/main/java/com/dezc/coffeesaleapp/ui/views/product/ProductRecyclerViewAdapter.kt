@@ -1,74 +1,27 @@
 package com.dezc.coffeesaleapp.ui.views.product
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.navigation.Navigation
-
-import androidx.recyclerview.widget.RecyclerView
-
-import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.activities.dummy.DummyContent.DummyItem
+import androidx.databinding.DataBindingUtil
+import com.dezc.coffeesaleapp.R.layout.item_product
+import com.dezc.coffeesaleapp.databinding.ItemProductBinding
 import com.dezc.coffeesaleapp.models.Product
-import com.dezc.coffeesaleapp.ui.utils.callback.OnProductClickListener
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
+import com.dezc.coffeesaleapp.ui.utils.commons.DataBoundViewHolder
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnProductClickListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class ProductRecyclerViewAdapter(
-        private val mContext: ProductFragment,
-        private val mValues: MutableList<Product>,
+        options: FirebaseRecyclerOptions<Product>,
         private val mListener: OnProductClickListener?
-) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
+) : FirebaseRecyclerAdapter<Product, DataBoundViewHolder<ItemProductBinding>>(options) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_product, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<ItemProductBinding> =
+            DataBoundViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_product, parent, false))
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mItem = mValues[position]
-        holder.mIdView.text = item.id.toString()
-        holder.mContentView.text = item.name
-
-        holder.mView.setOnClickListener {
-            if (null != mListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected.
-                mListener.onProductClickListener(holder.mItem)
-                Toast.makeText(
-                        mContext.context, "Elemento clickeado: " + holder.mItem!!, Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    override fun getItemCount(): Int {
-        return mValues.size
-    }
-
-    /*fun setItems(items: Collection<DummyItem>) {
-        mValues.clear()
-        mValues.addAll(items)
-    }*/
-
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView
-        val mContentView: TextView
-        var mItem: Product? = null
-
-        init {
-            mIdView = mView.findViewById<View>(R.id.item_number) as TextView
-            mContentView = mView.findViewById<View>(R.id.content) as TextView
-        }
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
+    override fun onBindViewHolder(holder: DataBoundViewHolder<ItemProductBinding>, position: Int, product: Product) {
+        holder.binding.product = product
+        holder.binding.listener = mListener
+        holder.binding.executePendingBindings()
     }
 }

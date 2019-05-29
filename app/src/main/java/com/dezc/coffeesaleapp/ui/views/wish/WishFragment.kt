@@ -1,5 +1,6 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,16 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.ui.views.maps.MapsFragment
 import com.dezc.coffeesaleapp.fragments.dummy.DummyContent
+import com.dezc.coffeesaleapp.functions.DatabaseHandler
 import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.ui.views.maps.MapsFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * A fragment representing a list of Items.
@@ -30,6 +32,9 @@ import com.dezc.coffeesaleapp.models.Product
  * fragment (e.g. upon screen orientation changes).
  */
 class WishFragment : Fragment() {
+
+    private lateinit var wishProducts: MutableList<Product>;
+
     // TODO: Customize parameters
     private var mColumnCount = 1
     private val mListener: OnListFragmentInteractionListener? = null
@@ -48,12 +53,16 @@ class WishFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_wish_list, container, false)
 
+        val context: Context = this.context?: return null
+
         btnSale = view.findViewById(R.id.buttonSale)
         btnSale!!.setOnClickListener {
-            Log.d("WishFragment: ", "Clicked in the button...")
-            val intentMap = Intent(activity, MapsFragment::class.java)
-            startActivity(intentMap)
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_mapsFragment);
         }
+
+        val dbCart = DatabaseHandler(context)
+
+        wishProducts = dbCart.getAllProducts();
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -63,7 +72,7 @@ class WishFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            //myWishRecyclerViewAdapter = new WishRecyclerViewAdapter(DummyContent.ITEMS);
+            val myWishRecyclerViewAdapter = WishRecyclerViewAdapter(wishProducts);
             view.adapter = myWishRecyclerViewAdapter
         }
         return view
