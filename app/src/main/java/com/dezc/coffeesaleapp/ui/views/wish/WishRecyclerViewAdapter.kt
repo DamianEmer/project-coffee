@@ -1,61 +1,21 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-
-import androidx.recyclerview.widget.RecyclerView
-
-import com.dezc.coffeesaleapp.R
+import androidx.databinding.DataBindingUtil
+import com.dezc.coffeesaleapp.R.layout.item_wish
+import com.dezc.coffeesaleapp.databinding.ItemWishBinding
 import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.ui.utils.commons.adapters.DataBoundRecyclerAdapter
 
-/**
- * [RecyclerView.Adapter] that can display a [Product]
- */
-class WishRecyclerViewAdapter(items: List<Product>) : RecyclerView.Adapter<WishRecyclerViewAdapter.ViewHolder>() {
+class WishRecyclerViewAdapter : DataBoundRecyclerAdapter<Product, ItemWishBinding>() {
+    override fun createBinding(parent: ViewGroup): ItemWishBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_wish, parent, false)
 
-    init {
-        mValues = items
+    override fun bind(binding: ItemWishBinding, item: Product, position: Int) {
+        binding.product = item
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_wish, parent, false)
-        return ViewHolder(view)
-    }
+    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem.id == newItem.id
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mItem = mValues[position]
-        holder.mIdView.text = item.id.toString()
-        holder.mContentView.text = item.name
-
-        holder.mView.setOnClickListener { }
-    }
-
-    override fun getItemCount(): Int {
-        return mValues.size
-    }
-
-
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView
-        val mContentView: TextView
-        var mItem: Product? = null
-
-        init {
-            mIdView = mView.findViewById<View>(R.id.item_number) as TextView
-            mContentView = mView.findViewById<View>(R.id.content) as TextView
-        }
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
-    }
-
-    companion object {
-
-        private lateinit var mValues: List<Product>
-    }
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = oldItem == newItem
 }
