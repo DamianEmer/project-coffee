@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -57,11 +58,27 @@ class SignUpScreenFragment : Fragment() {
     }
 
     fun onSaveClient(view: View) {
-        if (email_input_edit_text.isNotEmpty() && password_input_edit_text.isNotEmpty() && ::imageUri.isLateinit) {
-            mLoginViewModel.signUp(Client(nameInputEditText.text.toString(),
-                    lastnameInputEditText.text.toString(), secondLastnameInputEditText.text.toString(),
-                    whatsAppNumberInputEditText.text.toString(), email_input_edit_text.text.toString(),
-                    password_input_edit_text.text.toString()), imageUri, onSignUp(view))
+        if(!::imageUri.isInitialized){
+            imageUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/coffee-sale.appspot.com/o/profile_photo.png?alt=media&token=b08d65e6-1cfd-4a4a-80a7-576c96de22de")
+        }
+        if (nameInputEditText.text.toString().isNotEmpty()
+                && lastnameInputEditText.text.toString().isNotEmpty()
+                && secondLastnameInputEditText.text.toString().isNotEmpty()
+                && whatsAppNumberInputEditText.text.toString().isNotEmpty()
+                && email_input_edit_text.isNotEmpty()
+                && password_input_edit_text.isNotEmpty()
+                && ::imageUri.isLateinit) {
+            mLoginViewModel.signUp(Client(
+                    nameInputEditText.text.toString(),
+                    lastnameInputEditText.text.toString(),
+                    secondLastnameInputEditText.text.toString(),
+                    whatsAppNumberInputEditText.text.toString(),
+                    email_input_edit_text.text.toString(),
+                    password_input_edit_text.text.toString()),
+                    imageUri,
+                    onSignUp(view))
+        } else {
+            Toast.makeText(context, "Faltan algunos datos", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -83,6 +100,7 @@ class SignUpScreenFragment : Fragment() {
                 && data != null && data.data != null) {
             imageUri = data.data!!
             Glide.with(this).load(imageUri).into(profile_photo_image_view)
+
         }
     }
 
