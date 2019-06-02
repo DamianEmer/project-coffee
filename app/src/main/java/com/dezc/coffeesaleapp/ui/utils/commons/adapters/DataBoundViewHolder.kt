@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.utils.commons
+package com.dezc.coffeesaleapp.ui.utils.commons.adapters
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.utils.commons
+package com.dezc.coffeesaleapp.ui.utils.commons.adapters
 
 import android.view.ViewGroup
 import androidx.annotation.NonNull
@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.dezc.coffeesaleapp.functions.CollectionUtils.toArray
 
-abstract class DataBoundListAdapter<T, V : ViewDataBinding> :
+abstract class DataBoundRecyclerAdapter<T, V : ViewDataBinding> :
         RecyclerView.Adapter<DataBoundViewHolder<V>>() {
 
     lateinit var items: List<T>
