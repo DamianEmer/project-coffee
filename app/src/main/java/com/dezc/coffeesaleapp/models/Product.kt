@@ -2,8 +2,12 @@ package com.dezc.coffeesaleapp.models
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.dezc.coffeesaleapp.BR
 
+@Entity(tableName = "product_table")
 class Product() : BaseObservable() {
 
     constructor(id: Int = 0, name: String = "", price: Int = 0, description: String = "") : this() {
@@ -14,6 +18,8 @@ class Product() : BaseObservable() {
     }
 
     @get:Bindable
+    @PrimaryKey
+    @ColumnInfo(name = "product_id")
     var id: Int = 0
         set(value) {
             field = value
