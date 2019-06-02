@@ -9,4 +9,3 @@
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:context=".ui.views.product.ProductFragment"
     tools:listitem="@layout/item_product" />
-

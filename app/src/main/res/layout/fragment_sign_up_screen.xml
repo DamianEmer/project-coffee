@@ -39,7 +39,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{context::openFileChooser}"
+                android:onClick="@{() -> context.openFileChooser()}"
                 android:text="@string/profile_photo_btn"
                 android:textColor="@android:color/widget_edittext_dark"
                 app:layout_constraintBottom_toTopOf="@+id/guideline5"
