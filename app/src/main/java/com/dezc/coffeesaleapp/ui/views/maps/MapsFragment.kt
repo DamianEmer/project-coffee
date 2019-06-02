@@ -11,6 +11,7 @@ import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -20,6 +21,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
 
+    private lateinit var mMapReference: MapView
+
     private lateinit var mBinding: FragmentMapsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,28 +31,30 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         return mBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mMapReference = map
+        mMapReference.onCreate(savedInstanceState)
+        mMapReference.getMapAsync(this)
+    }
+
     override fun onStart() {
         super.onStart()
-        map.onStart()
+        mMapReference.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        map.onResume()
+        mMapReference.onResume()
     }
 
     override fun onStop() {
         super.onStop()
-        map.onStop()
+        mMapReference.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        map.onLowMemory()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        map.getMapAsync(this)
+        mMapReference.onLowMemory()
     }
 
     fun onNext(view: View) {

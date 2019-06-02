@@ -40,7 +40,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
     fun signUp(client: Client, imageUri: Uri =
             Uri.parse("https://firebasestorage.googleapis.com/v0/b/coffee-sale.appspot.com/o/profile_photo.png?alt=media&token=b08d65e6-1cfd-4a4a-80a7-576c96de22de"), completeCallback: CompleteCallback<Void>) {
         loginLoading.postValue(true)
-        mAuth.createUserWithEmailAndPassword(client.email, client.password)
+        mAuth.createUserWithEmailAndPassword(client.email!!, client.password!!)
                 .addOnCanceledListener(this)
                 .addOnFailureListener(this)
                 .addOnSuccessListener { authResult ->

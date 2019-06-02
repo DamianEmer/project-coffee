@@ -5,9 +5,11 @@ import androidx.databinding.ViewDataBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
-abstract class DataBoundFirebaseRecyclerAdapter<T, V : ViewDataBinding>(options: FirebaseRecyclerOptions<T>) : FirebaseRecyclerAdapter<T, DataBoundViewHolder<V>>(options) {
+abstract class DataBoundFirebaseRecyclerAdapter<T, V : ViewDataBinding>(options: FirebaseRecyclerOptions<T>)
+    : FirebaseRecyclerAdapter<T, DataBoundViewHolder<V>>(options) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<V> = DataBoundViewHolder(createBinding(parent))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<V>
+            = DataBoundViewHolder(createBinding(parent))
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<V>, position: Int, item: T) {
         bind(holder.binding, position, item)

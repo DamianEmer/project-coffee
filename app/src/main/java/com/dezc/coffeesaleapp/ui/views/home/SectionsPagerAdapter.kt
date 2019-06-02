@@ -2,12 +2,13 @@ package com.dezc.coffeesaleapp.ui.views.home
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.dezc.coffeesaleapp.ui.views.product.ProductFragment
 import com.dezc.coffeesaleapp.ui.views.profile.ProfileFragment
 import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
 
-class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
@@ -19,5 +20,9 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getCount(): Int {
         return 3
+    }
+
+    override fun getItemPosition(`object`: Any): Int {
+        return PagerAdapter.POSITION_NONE
     }
 }

@@ -13,8 +13,6 @@ abstract class DataBoundRecyclerAdapter<T, V : ViewDataBinding> :
 
     var dataVersion: Int = 0
 
-    private val mDataAsyncUpdater = DataAsyncUpdater(this)
-
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int):
             DataBoundViewHolder<V> = DataBoundViewHolder(createBinding(parent))
 
@@ -38,7 +36,7 @@ abstract class DataBoundRecyclerAdapter<T, V : ViewDataBinding> :
                 items = update
                 notifyItemRangeRemoved(0, oldSize)
             }
-            else -> mDataAsyncUpdater.execute(*toArray(update))
+            else -> DataAsyncUpdater(this).execute(*toArray(update))
         }
     }
 

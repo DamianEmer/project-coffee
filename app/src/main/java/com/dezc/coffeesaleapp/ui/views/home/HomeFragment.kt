@@ -18,7 +18,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var mBinding: FragmentHomeBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         mBinding = FragmentHomeBinding.inflate(inflater)
         return mBinding.root
     }
@@ -37,5 +38,4 @@ class HomeFragment : Fragment() {
                     .setAction("Action", null).show()
         }
     }
-
 }

@@ -7,7 +7,7 @@ import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-class Client : BaseObservable {
+class Client() : BaseObservable() {
 
     @get:Bindable
     var clientId: Long = 0
@@ -62,7 +62,7 @@ class Client : BaseObservable {
         }
 
     constructor(name: String, lastName: String, secondLastName: String, numberWhatsApp: String,
-                email: String) {
+                email: String) : this() {
         this.name = name
         this.lastName = lastName
         this.secondLastName = secondLastName
@@ -70,7 +70,8 @@ class Client : BaseObservable {
         this.email = email
     }
 
-    constructor(name: String, lastName: String, secondLastName: String, numberWhatsApp: String, email: String, password: String, profilePhoto: String) {
+    constructor(name: String, lastName: String, secondLastName: String, numberWhatsApp: String,
+                email: String, password: String, profilePhoto: String) : this() {
         this.name = name
         this.lastName = lastName
         this.secondLastName = secondLastName
@@ -80,7 +81,8 @@ class Client : BaseObservable {
         this.profilePhoto = profilePhoto
     }
 
-    constructor(name: String, lastName: String, secondLastName: String, numberWhatsApp: String, email: String, password: String) {
+    constructor(name: String, lastName: String, secondLastName: String, numberWhatsApp: String,
+                email: String, password: String) : this() {
         this.name = name
         this.lastName = lastName
         this.secondLastName = secondLastName

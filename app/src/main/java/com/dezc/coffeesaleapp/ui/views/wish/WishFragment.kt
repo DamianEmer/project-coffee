@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,18 +26,23 @@ class WishFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         mBinding = FragmentWishListBinding.inflate(inflater)
         mBinding.context = this
+        mBinding.lifecycleOwner = this
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mAdapter = WishRecyclerViewAdapter()
+        wish_list.adapter = mAdapter
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
         mWishViewModel.allProducts.observe(this, Observer { products ->
+            Log.i(WishFragment::class.simpleName, "allProducts -> Observer -> $products")
             products?.let {
+                Log.i(WishFragment::class.simpleName,
+                        "allProducts -> Observer -> Non Null -> ${it.map { product -> product.name }
+                        .reduce { acc, s -> "$acc, $s" }}")
                 mAdapter.replace(it)
             }
         })
-        wish_list.adapter = mAdapter
     }
 
     fun onSale(view: View) {
