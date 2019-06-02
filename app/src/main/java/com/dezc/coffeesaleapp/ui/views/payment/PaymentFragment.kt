@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.fragment_payment.*
 
 class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    private var mTypesPaymentItems: Array<String>? = null
-
     private lateinit var mBinding: FragmentPaymentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,9 +24,8 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mTypesPaymentItems = arrayOf("Efectivo", "Tarjeta")
         type_payment_select.onItemSelectedListener = this
-        type_payment_select.adapter = ArrayAdapter.createFromResource(context!!, R.array.payments_array, simple_spinner_dropdown_item)
+        type_payment_select.adapter = ArrayAdapter.createFromResource(context!!, R.array.payment_array, simple_spinner_dropdown_item)
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -37,6 +34,5 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
-
     }
 }
