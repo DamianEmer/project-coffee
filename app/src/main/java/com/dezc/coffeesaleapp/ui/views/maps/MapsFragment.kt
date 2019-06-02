@@ -1,6 +1,5 @@
 package com.dezc.coffeesaleapp.ui.views.maps
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentMapsBinding
-import com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
-
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -29,6 +26,26 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         mBinding = FragmentMapsBinding.inflate(inflater)
         mBinding.context = this
         return mBinding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        map.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        map.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        map.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        map.onLowMemory()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
