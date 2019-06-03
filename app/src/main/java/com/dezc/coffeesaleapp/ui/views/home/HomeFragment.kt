@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
 
-        mSectionsPagerAdapter = SectionsPagerAdapter(getSupportFragmentManager())
+        mSectionsPagerAdapter = SectionsPagerAdapter(getChildFragmentManager())
 
         container.adapter = mSectionsPagerAdapter
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
