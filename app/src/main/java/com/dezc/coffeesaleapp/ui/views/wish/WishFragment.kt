@@ -35,13 +35,7 @@ class WishFragment : Fragment() {
         wish_list.adapter = mAdapter
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
         mWishViewModel.allProducts.observe(this, Observer { products ->
-            Log.i(WishFragment::class.simpleName, "allProducts -> Observer -> $products")
-            products?.let {
-                Log.i(WishFragment::class.simpleName,
-                        "allProducts -> Observer -> Non Null -> ${it.map { product -> product.name }
-                        .reduce { acc, s -> "$acc, $s" }}")
-                mAdapter.replace(it)
-            }
+            products?.let { mAdapter.replace(it) }
         })
     }
 

@@ -18,9 +18,9 @@ class Product() : BaseObservable() {
     }
 
     @get:Bindable
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "product_id")
-    var id: Int = 0
+    var id: Int? = null
         set(value) {
             field = value
             notifyPropertyChanged(BR.id)

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.dezc.coffeesaleapp.db.daos.ProductDAO
 import com.dezc.coffeesaleapp.models.Product
 
-@Database(entities = [Product::class], version = 1)
+@Database(entities = [Product::class], version = 2)
 abstract class ProductRoomDatabase : RoomDatabase() {
 
     abstract fun productDAO(): ProductDAO
@@ -19,7 +19,9 @@ abstract class ProductRoomDatabase : RoomDatabase() {
         fun getDatabase(context: Context) = INSTANCE ?: synchronized(this) {
             val instance = Room.databaseBuilder(context.applicationContext,
                     ProductRoomDatabase::class.java,
-                    "Product_database").build()
+                    "Product_database")
+                    .fallbackToDestructiveMigration()
+                    .build()
             INSTANCE = instance
             instance
         }
