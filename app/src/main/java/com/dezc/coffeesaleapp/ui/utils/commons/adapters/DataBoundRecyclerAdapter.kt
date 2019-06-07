@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.utils.commons
+package com.dezc.coffeesaleapp.ui.utils.commons.adapters
 
 import android.view.ViewGroup
 import androidx.annotation.NonNull
@@ -6,14 +6,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.dezc.coffeesaleapp.functions.CollectionUtils.toArray
 
-abstract class DataBoundListAdapter<T, V : ViewDataBinding> :
+abstract class DataBoundRecyclerAdapter<T, V : ViewDataBinding> :
         RecyclerView.Adapter<DataBoundViewHolder<V>>() {
 
     lateinit var items: List<T>
 
     var dataVersion: Int = 0
-
-    private val mDataAsyncUpdater = DataAsyncUpdater(this)
 
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int):
             DataBoundViewHolder<V> = DataBoundViewHolder(createBinding(parent))
@@ -38,7 +36,7 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding> :
                 items = update
                 notifyItemRangeRemoved(0, oldSize)
             }
-            else -> mDataAsyncUpdater.execute(*toArray(update))
+            else -> DataAsyncUpdater(this).execute(*toArray(update))
         }
     }
 

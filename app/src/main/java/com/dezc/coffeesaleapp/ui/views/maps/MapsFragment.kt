@@ -1,6 +1,5 @@
 package com.dezc.coffeesaleapp.ui.views.maps
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,18 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentMapsBinding
-import com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_maps.*
 
-
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
+
+    private lateinit var mMapReference: MapView
 
     private lateinit var mBinding: FragmentMapsBinding
 
@@ -32,7 +32,29 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        map.getMapAsync(this)
+        mMapReference = map
+        mMapReference.onCreate(savedInstanceState)
+        mMapReference.getMapAsync(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mMapReference.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mMapReference.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mMapReference.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mMapReference.onLowMemory()
     }
 
     fun onNext(view: View) {

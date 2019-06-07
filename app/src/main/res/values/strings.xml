@@ -45,4 +45,8 @@
     <string name="test_price_detail_product">Price</string>
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
+    <string-array name="payment_array">
+        <item>Efectivo</item>
+        <item>Tarjeta</item>
+    </string-array>
 </resources>

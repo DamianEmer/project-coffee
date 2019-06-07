@@ -14,21 +14,25 @@ import com.dezc.coffeesaleapp.R;
 import com.dezc.coffeesaleapp.models.Product;
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener;
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel;
+import com.dezc.coffeesaleapp.viewmodels.WishViewModel;
 
 public class HomeActivity extends AppCompatActivity implements OnProductClickListener {
 
-    private ProductViewModel mViewModel;
+    private ProductViewModel mProductViewModel;
+
+    private WishViewModel mWishViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+        mProductViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+        mWishViewModel = ViewModelProviders.of(this).get(WishViewModel.class);
     }
 
     @Override
     public void onProductClickListener(Product item) {
-        mViewModel.getProduct().postValue(item);
+        mProductViewModel.getProduct().postValue(item);
         Navigation.findNavController(this, R.id.nav_host_home).navigate(R.id.action_homeFragment_to_detailProductFragment);
     }
 

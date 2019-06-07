@@ -7,21 +7,17 @@ import com.dezc.coffeesaleapp.R.layout.item_product
 import com.dezc.coffeesaleapp.databinding.ItemProductBinding
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
-import com.dezc.coffeesaleapp.ui.utils.commons.DataBoundViewHolder
-import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.dezc.coffeesaleapp.ui.utils.commons.adapters.DataBoundFirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 class ProductRecyclerViewAdapter(
         options: FirebaseRecyclerOptions<Product>,
         private val mListener: OnProductClickListener?
-) : FirebaseRecyclerAdapter<Product, DataBoundViewHolder<ItemProductBinding>>(options) {
+) : DataBoundFirebaseRecyclerAdapter<Product, ItemProductBinding>(options) {
+    override fun createBinding(parent: ViewGroup): ItemProductBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_product, parent, false)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<ItemProductBinding> =
-            DataBoundViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_product, parent, false))
-
-    override fun onBindViewHolder(holder: DataBoundViewHolder<ItemProductBinding>, position: Int, product: Product) {
-        holder.binding.product = product
-        holder.binding.listener = mListener
-        holder.binding.executePendingBindings()
+    override fun bind(binding: ItemProductBinding, position: Int, item: Product) {
+        binding.product = item
+        binding.listener = mListener
     }
 }

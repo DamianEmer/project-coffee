@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="payments_array">
-        <item>Selecciona un metodo</item>
-        <item>Efectivo</item>
-        <item>Tarjeta</item>
-    </string-array>
-</resources>

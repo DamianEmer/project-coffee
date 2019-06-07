@@ -58,9 +58,6 @@ class SignUpScreenFragment : Fragment() {
     }
 
     fun onSaveClient(view: View) {
-        if(!::imageUri.isInitialized){
-            imageUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/coffee-sale.appspot.com/o/profile_photo.png?alt=media&token=b08d65e6-1cfd-4a4a-80a7-576c96de22de")
-        }
         if (nameInputEditText.text.toString().isNotEmpty()
                 && lastnameInputEditText.text.toString().isNotEmpty()
                 && secondLastnameInputEditText.text.toString().isNotEmpty()
@@ -88,7 +85,7 @@ class SignUpScreenFragment : Fragment() {
         }
     }
 
-    fun openFileChooser(view: View) {
+    fun openFileChooser() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT

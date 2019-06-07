@@ -39,7 +39,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{context::openFileChooser}"
+                android:onClick="@{() -> context.openFileChooser()}"
                 android:text="@string/profile_photo_btn"
                 android:textColor="@android:color/widget_edittext_dark"
                 app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -199,6 +199,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:onClick="@{context::onExistingAccount}"
                     android:text="@string/existing_account"
                     android:visibility="@{!loading ? View.VISIBLE : View.INVISIBLE}" />
@@ -217,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="32dp" />
+                app:layout_constraintGuide_begin="24dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
