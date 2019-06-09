@@ -108,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/interior_number"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/outdoor_number"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,7 +146,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/postal_code"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -226,6 +226,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
+                android:onClick="@{context::onBack}"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button3"
@@ -247,47 +248,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button2"
                 app:layout_constraintTop_toTopOf="@+id/guideline12" />
-
-            <!--<androidx.constraintlayout.widget.Guideline-->
-                <!--android:id="@+id/guideline8"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--app:layout_constraintGuide_begin="615dp" />-->
-
-            <!--<androidx.constraintlayout.widget.Guideline-->
-                <!--android:id="@+id/guideline12"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical"-->
-                <!--app:layout_constraintGuide_begin="200dp" />-->
-
-            <!--<com.google.android.material.button.MaterialButton-->
-                <!--android:id="@+id/button_cancel"-->
-                <!--style="@style/Widget.MaterialComponents.Button"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:layout_marginEnd="8dp"-->
-                <!--android:text="Cancelar"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/address_form" />-->
-
-            <!--<com.google.android.material.button.MaterialButton-->
-                <!--android:id="@+id/button_next"-->
-                <!--style="@style/Widget.MaterialComponents.Button"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:layout_marginTop="24dp"-->
-                <!--android:layout_marginEnd="8dp"-->
-                <!--android:text="Siguiente"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/button_cancel" />-->
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

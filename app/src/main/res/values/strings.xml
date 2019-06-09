@@ -20,13 +20,13 @@
     <string name="back">Volver</string>
 
     <!--Cadenas para dirección-->
-    <string name="street">Calle</string>
-    <string name="outdoor_number">No Exterior</string>
+    <string name="street">Calle *</string>
+    <string name="outdoor_number">No Exterior *</string>
     <string name="interior_number">No Interior</string>
-    <string name="postal_code">C.P.</string>
-    <string name="suburb">Colonia</string>
-    <string name="city">Ciudad</string>
-    <string name="town">Municipio</string>
+    <string name="postal_code">C.P. *</string>
+    <string name="suburb">Colonia *</string>
+    <string name="city">Ciudad *</string>
+    <string name="town">Municipio *</string>
 
     <string name="profile_photo_text">Cargar una foto de perfil</string>
     <string name="profile_photo_btn">Seleccionar…</string>
