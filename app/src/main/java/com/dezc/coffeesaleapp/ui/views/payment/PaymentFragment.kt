@@ -18,6 +18,8 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var mBinding: FragmentPaymentBinding
 
+    private var mShowField: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = FragmentPaymentBinding.inflate(inflater)
         return mBinding.root
@@ -26,11 +28,18 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         type_payment_select.onItemSelectedListener = this
         type_payment_select.adapter = ArrayAdapter.createFromResource(context!!, R.array.payment_array, simple_spinner_dropdown_item)
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        Log.d("PaymentFragment: ", "Selecciono: " + parent.getItemAtPosition(position))
-        Toast.makeText(context, "Selecciono " + parent.getItemAtPosition(position), Toast.LENGTH_LONG).show()
+        if(parent.getItemAtPosition(position).toString() == "Efectivo"){
+            mBinding.showing = true
+            Toast.makeText(context, "Selecciono " + parent.getItemAtPosition(position), Toast.LENGTH_LONG).show()
+        }else{
+            mBinding.showing=false
+        }
+        //Log.d("PaymentFragment: ", "Selecciono: " + parent.getItemAtPosition(position))
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {

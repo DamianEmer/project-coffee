@@ -61,6 +61,7 @@
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
     <string-array name="payment_array">
+        <item>Selecciona</item>
         <item>Efectivo</item>
         <item>Tarjeta</item>
     </string-array>
