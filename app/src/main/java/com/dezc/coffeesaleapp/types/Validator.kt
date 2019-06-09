@@ -17,3 +17,7 @@ val whatsAppNumberValidator: Validator = {
 val passwordValidator = fun(passwordLength: Int): Validator = {
     it.length >= passwordLength
 }
+
+val codePostalValidator = fun(): Validator = {
+    it.length == 5
+}
