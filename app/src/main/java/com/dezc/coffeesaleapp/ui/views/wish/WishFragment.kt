@@ -1,7 +1,6 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentWishListBinding
+import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
 import kotlinx.android.synthetic.main.fragment_wish_list.*
 
-class WishFragment : Fragment() {
+class WishFragment : Fragment(), OnProductClickListener {
 
     private lateinit var mAdapter: WishRecyclerViewAdapter
 
@@ -31,7 +32,7 @@ class WishFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mAdapter = WishRecyclerViewAdapter()
+        mAdapter = WishRecyclerViewAdapter(this)
         wish_list.adapter = mAdapter
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
         mWishViewModel.allProducts.observe(this, Observer { products ->
@@ -41,5 +42,9 @@ class WishFragment : Fragment() {
 
     fun onSale(view: View) {
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_mapsFragment)
+    }
+
+    override fun onProductClickListener(product: Product) {
+        mWishViewModel.deleteWish(product)
     }
 }

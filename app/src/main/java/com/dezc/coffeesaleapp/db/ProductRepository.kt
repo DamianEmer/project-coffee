@@ -11,4 +11,7 @@ class ProductRepository(private val productDAO: ProductDAO) {
 
     @WorkerThread
     suspend fun insert(product: Product) = productDAO.insertProduct(product)
+
+    @WorkerThread
+    suspend fun delete(productId: Int) = productDAO.deleteProduct(productId)
 }

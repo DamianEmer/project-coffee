@@ -3,13 +3,23 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="deleting"
+            type="boolean" />
+
         <variable
             name="product"
             type="com.dezc.coffeesaleapp.models.Product" />
+
+        <variable
+            name="onClickListener"
+            type="com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -30,5 +40,19 @@
             android:text="@{product.name}"
             android:textAppearance="?attr/textAppearanceListItem"
             tools:text="Chocolate abuelita" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:onClick="@{() -> onClickListener.onProductClickListener(product)}"
+            android:text="Delete"
+            android:visibility="@{deleting ? View.GONE : View.VISIBLE}" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:visibility="@{deleting ? View.VISIBLE : View.GONE}" />
     </LinearLayout>
 </layout>

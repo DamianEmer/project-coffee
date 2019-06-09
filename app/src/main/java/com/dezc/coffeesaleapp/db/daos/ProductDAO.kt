@@ -17,4 +17,7 @@ import com.dezc.coffeesaleapp.models.Product
 
     @Query("DELETE from product_table")
     fun deleteAll()
+
+    @Query("DELETE from product_table WHERE product_id == :productId")
+    suspend fun deleteProduct(productId: Int)
 }

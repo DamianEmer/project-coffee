@@ -17,7 +17,11 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
 
     private val insertLoading: MutableLiveData<Boolean> = MutableLiveData()
 
+    private val mDeleteLoading: MutableLiveData<Boolean> = MutableLiveData()
+
     val allProducts: LiveData<List<Product>>
+
+    val deleteLoading: LiveData<Boolean> = mDeleteLoading
 
     init {
         allProducts = repository.allProducts
@@ -27,5 +31,13 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
         insertLoading.postValue(true)
         repository.insert(product)
         insertLoading.postValue(false)
+    }
+
+    fun deleteWish(product: Product) = viewModelScope.launch(Dispatchers.IO) {
+        product.id?.apply {
+            mDeleteLoading.postValue(true)
+            repository.delete(this)
+            mDeleteLoading.postValue(false)
+        }
     }
 }
