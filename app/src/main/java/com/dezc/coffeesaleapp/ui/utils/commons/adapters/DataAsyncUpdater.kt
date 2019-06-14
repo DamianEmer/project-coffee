@@ -1,11 +1,11 @@
-package com.dezc.coffeesaleapp.ui.utils.commons
+package com.dezc.coffeesaleapp.ui.utils.commons.adapters
 
 import android.os.AsyncTask
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 
-class DataAsyncUpdater<T, V : ViewDataBinding>(private val mDataBoundListAdapter:
-                                               DataBoundListAdapter<T, V>)
+class DataAsyncUpdater<T, V : ViewDataBinding>(private val mDataBoundRecyclerAdapter:
+                                               DataBoundRecyclerAdapter<T, V>)
     : AsyncTask<T, Unit, DiffUtil.DiffResult>() {
 
     private var mStartVersion: Int = 0
@@ -16,32 +16,32 @@ class DataAsyncUpdater<T, V : ViewDataBinding>(private val mDataBoundListAdapter
 
     override fun doInBackground(vararg update: T)
             : DiffUtil.DiffResult {
-        mStartVersion = mDataBoundListAdapter.dataVersion
-        mOldItems = mDataBoundListAdapter.items
+        mStartVersion = mDataBoundRecyclerAdapter.dataVersion
+        mOldItems = mDataBoundRecyclerAdapter.items
         mUpdate = update.toList()
         return DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
-            override fun getOldListSize(): Int = mDataBoundListAdapter.items.size
+            override fun getOldListSize(): Int = mDataBoundRecyclerAdapter.items.size
 
             override fun getNewListSize(): Int = mUpdate.size
 
             override fun areContentsTheSame(
                     oldItemPosition: Int,
                     newItemPosition: Int
-            ): Boolean = mDataBoundListAdapter
+            ): Boolean = mDataBoundRecyclerAdapter
                     .areContentsTheSame(mOldItems[oldItemPosition], mUpdate[newItemPosition])
 
             override fun areItemsTheSame(
                     oldItemPosition: Int,
                     newItemPosition: Int
-            ): Boolean = mDataBoundListAdapter
+            ): Boolean = mDataBoundRecyclerAdapter
                     .areItemsTheSame(mOldItems[oldItemPosition], mUpdate[newItemPosition])
         })
     }
 
     override fun onPostExecute(result: DiffUtil.DiffResult?) {
-        if (mStartVersion != mDataBoundListAdapter.dataVersion) return
-        mDataBoundListAdapter.items = mUpdate
-        result?.dispatchUpdatesTo(mDataBoundListAdapter)
+        if (mStartVersion != mDataBoundRecyclerAdapter.dataVersion) return
+        mDataBoundRecyclerAdapter.items = mUpdate
+        result?.dispatchUpdatesTo(mDataBoundRecyclerAdapter)
     }
 }

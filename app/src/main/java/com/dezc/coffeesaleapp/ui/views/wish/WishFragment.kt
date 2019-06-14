@@ -1,100 +1,50 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dezc.coffeesaleapp.R
-import com.dezc.coffeesaleapp.fragments.dummy.DummyContent
-import com.dezc.coffeesaleapp.functions.DatabaseHandler
+import com.dezc.coffeesaleapp.databinding.FragmentWishListBinding
 import com.dezc.coffeesaleapp.models.Product
-import com.dezc.coffeesaleapp.ui.views.maps.MapsFragment
-import kotlinx.android.synthetic.main.activity_home.*
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
+import com.dezc.coffeesaleapp.viewmodels.WishViewModel
+import kotlinx.android.synthetic.main.fragment_wish_list.*
 
-/**
- * A fragment representing a list of Items.
- *
- *
- * Activities containing this fragment MUST implement the [OnListFragmentInteractionListener]
- * interface.
- */
-/**
- * Mandatory empty constructor for the fragment manager to instantiate the
- * fragment (e.g. upon screen orientation changes).
- */
-class WishFragment : Fragment() {
+class WishFragment : Fragment(), OnProductClickListener {
 
-    private lateinit var wishProducts: MutableList<Product>;
+    private lateinit var mAdapter: WishRecyclerViewAdapter
 
-    // TODO: Customize parameters
-    private var mColumnCount = 1
-    private val mListener: OnListFragmentInteractionListener? = null
+    private lateinit var mBinding: FragmentWishListBinding
 
-    private var btnSale: Button? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (arguments != null) {
-            mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
-        }
-    }
+    private lateinit var mWishViewModel: WishViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_wish_list, container, false)
-
-        val context: Context = this.context?: return null
-
-        btnSale = view.findViewById(R.id.buttonSale)
-        btnSale!!.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_mapsFragment);
-        }
-
-        val dbCart = DatabaseHandler(context)
-
-        wishProducts = dbCart.getAllProducts();
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            val context = view.getContext()
-            if (mColumnCount <= 1) {
-                view.layoutManager = LinearLayoutManager(context)
-            } else {
-                view.layoutManager = GridLayoutManager(context, mColumnCount)
-            }
-            val myWishRecyclerViewAdapter = WishRecyclerViewAdapter(wishProducts);
-            view.adapter = myWishRecyclerViewAdapter
-        }
-        return view
+        mBinding = FragmentWishListBinding.inflate(inflater)
+        mBinding.context = this
+        mBinding.lifecycleOwner = this
+        return mBinding.root
     }
 
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Product)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mAdapter = WishRecyclerViewAdapter(this)
+        wish_list.adapter = mAdapter
+        mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
+        mWishViewModel.allProducts.observe(this, Observer { products ->
+            products?.let { mAdapter.replace(it) }
+        })
     }
 
-    companion object {
+    fun onSale(view: View) {
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_mapsFragment)
+    }
 
-        // TODO: Customize parameter argument names
-        private val ARG_COLUMN_COUNT = "column-count"
-        val myWishRecyclerViewAdapter = WishRecyclerViewAdapter(DummyContent.ITEMS)
-
-        // TODO: Customize parameter initialization
-        fun newInstance(): WishFragment {
-            val fragment = WishFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
+    override fun onProductClickListener(product: Product) {
+        mWishViewModel.deleteWish(product)
     }
 }

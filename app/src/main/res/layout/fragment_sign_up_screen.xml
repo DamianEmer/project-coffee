@@ -39,7 +39,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{context::openFileChooser}"
+                android:onClick="@{() -> context.openFileChooser()}"
                 android:text="@string/profile_photo_btn"
                 android:textColor="@android:color/widget_edittext_dark"
                 app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -94,11 +94,11 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline5">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/nameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -113,11 +113,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/lastnameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -132,11 +132,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:id="@+id/secondLastnameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
@@ -151,16 +151,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:id="@+id/whatsappNumberTextInputLayout"
+                    android:id="@+id/whatAppNumberTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/whatsappNumberInputEditText"
+                        android:id="@+id/whatsAppNumberInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -191,15 +191,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="@{context::onSaveClient}"
-                    android:text="@string/singUpFinish_btn" />
+                    android:text="@string/singUpFinish_btn"
+                    android:visibility="@{!loading ? View.VISIBLE : View.INVISIBLE}" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_login"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:onClick="@{context::onExistingAccount}"
-                    android:text="@string/existing_account" />
+                    android:text="@string/existing_account"
+                    android:visibility="@{!loading ? View.VISIBLE : View.INVISIBLE}" />
 
             </LinearLayout>
 
@@ -215,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="32dp" />
+                app:layout_constraintGuide_begin="24dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
