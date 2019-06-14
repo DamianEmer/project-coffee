@@ -48,13 +48,13 @@
 
         <Spinner
             android:id="@+id/type_payment_select"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -79,22 +79,34 @@
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="204dp"
-            android:layout_marginEnd="8dp"
-            android:text="Comprar"
+            android:layout_marginTop="296dp"
+            android:layout_marginEnd="56dp"
             android:onClick="@{context::onOrder}"
+            android:text="Comprar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.753"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/type_payment_select" />
 
         <Button
             android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:onClick="@{context::onCancel}"
+            android:text="Cancelar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="547dp" />
+
+        <Button
+            android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="296dp"
             android:text="Button"
-            android:onClick="@{context::onCancel}"/>
+            android:onClick="@{context::onAdditionalIngredient}"
+            app:layout_constraintTop_toBottomOf="@+id/type_payment_select"
+            tools:layout_editor_absoluteX="73dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

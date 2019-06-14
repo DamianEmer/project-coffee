@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -27,6 +29,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.dialog_additional.*
 import kotlinx.android.synthetic.main.fragment_payment.*
 
 class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -85,11 +88,13 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
+    // Metodoque cargara la informacion hacia la base de datos
+
     fun onOrder(view: View) {
         mDatabaseReference.child(mUser.getUid())
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        Log.i("PaymentFragment", "Producto: ${mProducts.get(1).name} - Type: ${mPaymentType}")
+                        //Log.i("PaymentFragment", "Producto: ${mProducts.get(1).name} - Type: ${mPaymentType}")
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
@@ -100,5 +105,15 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun onCancel(view: View){
         Navigation.findNavController(view).navigate(R.id.action_paymentFragment_to_homeFragment)
+    }
+
+    fun onAdditionalIngredient(view: View){
+        val builder = AlertDialog.Builder(context!!)
+        val inflater = layoutInflater
+        builder.setTitle("Ingrediente adicional")
+        val dialogLayout = inflater.inflate(R.layout.dialog_additional, null)
+        builder.setView(dialogLayout)
+        builder.setPositiveButton("OK") {dialogInterface, i -> Toast.makeText(context, "EditText: ", Toast.LENGTH_LONG).show()}
+        builder.show()
     }
 }
