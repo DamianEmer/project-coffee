@@ -18,6 +18,7 @@
     <string name="next">Siguiente</string>
     <string name="buy">Comprar</string>
     <string name="back">Volver</string>
+    <string name="order">Ordenar</string>
 
     <!--Cadenas para dirección-->
     <string name="street">Calle *</string>
@@ -61,6 +62,7 @@
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
     <string-array name="payment_array">
+        <item>Selecciona</item>
         <item>Efectivo</item>
         <item>Tarjeta</item>
     </string-array>
