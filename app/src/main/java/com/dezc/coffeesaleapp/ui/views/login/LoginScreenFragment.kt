@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentLoginScreenBinding
+import com.dezc.coffeesaleapp.models.FormErrors
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginScreenFragment : Fragment() {
@@ -30,6 +32,12 @@ class LoginScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mLoginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
         mLoginViewModel.loginLoading.observe(this, Observer<Boolean> { mBinding.loading = it })
+        mLoginViewModel.loginErrors.observe(this, Observer<FormErrors> {
+            when {
+                it.formId == "email" -> requestErrors(email_input_edit_text, it.errorMessage)
+                it.formId == "password" -> requestErrors(password_input_edit_text, it.errorMessage)
+            }
+        })
     }
 
     fun onRegisterNow(view: View) =
@@ -47,5 +55,10 @@ class LoginScreenFragment : Fragment() {
                 Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_homeActivity)
             }
         }
+    }
+
+    private fun requestErrors(textInputEditText: TextInputEditText, errorMessage: String) {
+        textInputEditText.error = errorMessage
+        textInputEditText.requestFocus()
     }
 }

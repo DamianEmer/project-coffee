@@ -3,13 +3,17 @@ package com.dezc.coffeesaleapp.viewmodels
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dezc.coffeesaleapp.models.Client
+import com.dezc.coffeesaleapp.models.FormErrors
 import com.dezc.coffeesaleapp.ui.utils.callbacks.CompleteCallback
 import com.google.android.gms.tasks.OnCanceledListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -25,15 +29,28 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
     private val mClientsStorageReference: StorageReference = FirebaseStorage.getInstance()
             .reference.child("clients")
 
+    private val mLoginErrors = MutableLiveData<FormErrors>()
+
     val loginLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     val signUpProgress: MutableLiveData<Int> = MutableLiveData()
+
+    val loginErrors: LiveData<FormErrors> = mLoginErrors
 
     fun login(email: String, password: String, successCallback: (AuthResult?) -> Unit) {
         loginLoading.postValue(true)
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCanceledListener(this)
-                .addOnFailureListener(this)
+                .addOnFailureListener {
+                    mLoginErrors.postValue(when (it) {
+                        is FirebaseAuthInvalidUserException ->
+                            FormErrors("User does not exist", "email") // TODO User does not exist
+                        is FirebaseAuthInvalidCredentialsException ->
+                            FormErrors("Invalid password", "password") // TODO Password invalid or User dos not have a password
+                        else -> null
+                    })
+                    loginLoading.postValue(false)
+                }
                 .addOnSuccessListener { successCallback(it) }
     }
 
