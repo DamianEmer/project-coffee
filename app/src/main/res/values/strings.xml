@@ -18,6 +18,7 @@
     <string name="next">Siguiente</string>
     <string name="buy">Comprar</string>
     <string name="back">Volver</string>
+    <string name="order">Ordenar</string>
 
     <!--Cadenas para dirección-->
     <string name="street">Calle *</string>
