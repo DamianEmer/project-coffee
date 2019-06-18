@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui.views.payment
 
 import android.R.layout.simple_spinner_dropdown_item
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.bumptech.glide.load.engine.bitmap_recycle.IntegerArrayAdapter
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentPaymentBinding
 import com.dezc.coffeesaleapp.models.Address
@@ -38,13 +40,13 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var mOrderFlowViewModel: OrderFlowViewModel
 
-    private lateinit var mProducts:  List<Product>
+    private lateinit var mProducts: List<Product>
 
     private lateinit var mAddress: Address
 
     private lateinit var mPaymentType: String
 
-    private val mUser:FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+    private val mUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
     private val mDatabaseReference = FirebaseDatabase.getInstance()
             .getReference("clients")
 
@@ -69,18 +71,30 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mOrderFlowViewModel.address.observe(this, Observer { address ->
             this.mAddress = address
         })
+
+        mDatabaseReference.child(mUser.getUid())
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        //Log.i("PaymentFragment", "Producto: ${mProducts.get(1).name} - Type: ${mPaymentType}")
+                        mOrderFlowViewModel.client.postValue(snapshot.getValue(Client::class.java))
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        if(parent.getItemAtPosition(position).toString() == "Efectivo"){
+        if (parent.getItemAtPosition(position).toString() == "Efectivo") {
             mBinding.showing = true
             mOrderFlowViewModel.paymentType.postValue(parent.getItemAtPosition(position).toString())
             mOrderFlowViewModel.paymentType.observe(this, Observer { paymentType ->
                 this.mPaymentType = paymentType
             })
             Toast.makeText(context, "Selecciono " + parent.getItemAtPosition(position), Toast.LENGTH_LONG).show()
-        }else{
-            mBinding.showing=false
+        } else {
+            mBinding.showing = false
         }
     }
 
@@ -91,29 +105,34 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // Metodoque cargara la informacion hacia la base de datos
 
     fun onOrder(view: View) {
-        mDatabaseReference.child(mUser.getUid())
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        //Log.i("PaymentFragment", "Producto: ${mProducts.get(1).name} - Type: ${mPaymentType}")
-                    }
-
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                })
+        mOrderFlowViewModel.client.observe(this, Observer { client ->
+            Log.i(">>> PaymentFragment: ", "Cantidad efectivo: ${client.name}")
+        })
+        Navigation.findNavController(view).navigate(R.id.action_paymentFragment_to_statusOrderFragment2)
     }
 
-    fun onCancel(view: View){
+    fun onCancel(view: View) {
         Navigation.findNavController(view).navigate(R.id.action_paymentFragment_to_homeFragment)
     }
 
-    fun onAdditionalIngredient(view: View){
+    fun onAdditionalIngredient(view: View) {
         val builder = AlertDialog.Builder(context!!)
         val inflater = layoutInflater
         builder.setTitle("Ingrediente adicional")
         val dialogLayout = inflater.inflate(R.layout.dialog_additional, null)
         builder.setView(dialogLayout)
-        builder.setPositiveButton("OK") {dialogInterface, i -> Toast.makeText(context, "EditText: ", Toast.LENGTH_LONG).show()}
+        builder.setPositiveButton("OK") { p0, p1 ->
+
+            //Componer seccion porque no es effectiveQuantity
+            if (text_ingredient.text.toString().isNotEmpty()) {
+                Log.i("PaymentFragment", "No vacio")
+                mOrderFlowViewModel.effectiveQuantity.postValue(Integer.parseInt(text_ingredient.text.toString()))
+            } else {
+                Toast.makeText(context, "Ingrese ingrediente para avanzar..", Toast.LENGTH_LONG).show()
+            }
+        }.setNegativeButton("Cancel") { p0, p1 ->
+            Log.i("PaymentFragment", "Ningun ingrediente")
+        }
         builder.show()
     }
 }

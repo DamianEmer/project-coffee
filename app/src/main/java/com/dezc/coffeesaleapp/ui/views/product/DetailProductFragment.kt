@@ -44,6 +44,7 @@ class DetailProductFragment : Fragment() {
 
     fun addCart(view: View) {
         mProductViewModel.product.observe(this, Observer {
+            it.quantity = Integer.parseInt(text_quantity.text.toString())
             mWishViewModel.insertWish(it)
             Toast.makeText(view.context, "Agregado al carrito", Toast.LENGTH_SHORT).show()
         })

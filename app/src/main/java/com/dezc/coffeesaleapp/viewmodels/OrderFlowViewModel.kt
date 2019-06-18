@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dezc.coffeesaleapp.db.ProductRepository
 import com.dezc.coffeesaleapp.db.ProductRoomDatabase
 import com.dezc.coffeesaleapp.models.Address
+import com.dezc.coffeesaleapp.models.Client
 import com.dezc.coffeesaleapp.models.Product
 
 class OrderFlowViewModel(application: Application): AndroidViewModel(application) {
@@ -17,12 +18,18 @@ class OrderFlowViewModel(application: Application): AndroidViewModel(application
 
     val product: MutableLiveData<Product> = MutableLiveData()
 
+    val client: MutableLiveData<Client> = MutableLiveData()
+
     val address: MutableLiveData<Address> by lazy {
         MutableLiveData<Address>()
     }
 
     val paymentType: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
+    }
+
+    val effectiveQuantity: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
 
     init {

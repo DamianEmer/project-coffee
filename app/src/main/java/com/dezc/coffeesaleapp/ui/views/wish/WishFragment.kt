@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui.views.wish
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,9 @@ class WishFragment : Fragment(), OnProductClickListener {
         wish_list.adapter = mAdapter
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
         mWishViewModel.allProducts.observe(this, Observer { products ->
+            products.forEach{
+                a -> Log.i("WishFragment", "${a.name} - ${a.quantity}")
+            }
             products?.let { mAdapter.replace(it) }
         })
     }

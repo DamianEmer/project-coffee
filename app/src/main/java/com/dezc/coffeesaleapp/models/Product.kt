@@ -20,6 +20,16 @@ class Product() : BaseObservable() {
         this.description = description
     }
 
+    constructor(id: Int = 0, name: String = "", price: Int = 0, image: String = "",
+                description: String = "", quantity: Int = 0) : this() {
+        this.id = id
+        this.name = name
+        this.price = price
+        this.image = image
+        this.description = description
+        this.quantity = quantity
+    }
+
     @get:Bindable
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "product_id")
@@ -57,4 +67,6 @@ class Product() : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.description)
         }
+
+    var quantity: Int = 0
 }
