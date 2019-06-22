@@ -15,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:text="Welcome to Coffee Sale" />
+        tools:text="Welcome to Dolce Creppa" />
 
     <ImageView
         android:id="@+id/imageView2"
