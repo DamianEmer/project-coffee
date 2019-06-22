@@ -61,6 +61,9 @@
     <string name="test_price_detail_product">Price</string>
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
+    <string name="direction">Dirección</string>
+    <string name="ingredient">ingrediente...</string>
+    <string name="action_order_state">Mi compra</string>
     <string-array name="payment_array">
         <item>Selecciona</item>
         <item>Efectivo</item>

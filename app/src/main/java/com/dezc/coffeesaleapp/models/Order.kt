@@ -8,20 +8,21 @@ class Order(): BaseObservable() {
             client: Client = Client(),
             products: List<Product>,
             address: Address = Address(),
-            orderStatus: Boolean = false
+            orderStatus: Boolean = false,
+            ingredient: String = "",
+            typePayment: String = "",
+            quantityPayment: String = ""
         ):this(){
         this.client = client
         this.products = products
         this.address = address
         this.orderStatus = orderStatus
+        this.ingredient = ingredient
+        this.typePayment = typePayment
+        this.quantityPayment = quantityPayment
     }
 
     var client: Client = Client()
-        set(value) {
-            field = value
-        }
-
-    var nameClient: String = ""
         set(value) {
             field = value
         }
@@ -37,6 +38,21 @@ class Order(): BaseObservable() {
         }
 
     var orderStatus: Boolean = false
+        set(value) {
+            field = value
+        }
+
+    var ingredient: String = ""
+        set(value){
+            field = value
+        }
+
+    var typePayment: String = ""
+        set(value){
+            field = value
+        }
+
+    var quantityPayment: String = ""
         set(value) {
             field = value
         }

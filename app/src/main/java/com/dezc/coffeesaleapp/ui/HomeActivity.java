@@ -15,6 +15,7 @@ import com.dezc.coffeesaleapp.models.Product;
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener;
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel;
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements OnProductClickListener {
 
@@ -44,6 +45,9 @@ public class HomeActivity extends AppCompatActivity implements OnProductClickLis
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (R.id.loginActivity == item.getItemId()) {
+            FirebaseAuth.getInstance().signOut();
+        }
         return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(this, R.id.nav_host_home)) || super.onOptionsItemSelected(item);
     }
 }

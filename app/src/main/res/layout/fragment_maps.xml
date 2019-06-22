@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="context"
@@ -31,7 +31,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Dirección"
+                android:text="@string/direction"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,13 +68,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_street"
+                    style="@style/AppTheme.InputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    style="@style/AppTheme.InputLayout">
+                    android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_edit_street"
@@ -89,6 +89,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:baselineAligned="false"
                     android:divider="@drawable/separator"
                     android:gravity="fill_horizontal"
                     android:orientation="horizontal"
@@ -96,12 +97,13 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/text_input_layout_interior_number"
-                        android:layout_width="100dp"
+                        style="@style/AppTheme.InputLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
                         android:focusable="true"
-                        style="@style/AppTheme.InputLayout"
                         android:focusableInTouchMode="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -114,14 +116,19 @@
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <Space
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/text_input_layout_number_outdoor_number"
-                        android:layout_width="100dp"
+                        style="@style/AppTheme.InputLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
                         android:focusable="true"
-                        style="@style/AppTheme.InputLayout"
                         android:focusableInTouchMode="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -134,14 +141,19 @@
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <Space
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/text_input_layout_postal_code"
-                        android:layout_width="100dp"
+                        style="@style/AppTheme.InputLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
                         android:focusable="true"
-                        style="@style/AppTheme.InputLayout"
                         android:focusableInTouchMode="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -158,12 +170,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_suburb"
+                    style="@style/AppTheme.InputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:focusable="true"
-                    style="@style/AppTheme.InputLayout"
                     android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -178,12 +190,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_city"
+                    style="@style/AppTheme.InputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:focusable="true"
-                    style="@style/AppTheme.InputLayout"
                     android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -198,12 +210,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_town"
+                    style="@style/AppTheme.InputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:focusable="true"
-                    style="@style/AppTheme.InputLayout"
                     android:focusableInTouchMode="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -227,13 +239,13 @@
 
             <Button
                 android:id="@+id/button2"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:onClick="@{context::onBack}"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
