@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.dezc.coffeesaleapp.db.daos.ProductDAO
 import com.dezc.coffeesaleapp.models.Product
 
-@Database(entities = [Product::class], version = 3)
+@Database(entities = [Product::class], version = 4)
 abstract class ProductRoomDatabase : RoomDatabase() {
 
     abstract fun productDAO(): ProductDAO

@@ -28,8 +28,12 @@ class OrderFlowViewModel(application: Application): AndroidViewModel(application
         MutableLiveData<String>()
     }
 
-    val effectiveQuantity: MutableLiveData<Int> by lazy {
-        MutableLiveData<Int>()
+    val effectiveQuantity: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val ingredient: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 
     init {

@@ -25,14 +25,14 @@ import com.dezc.coffeesaleapp.models.Client
 import com.dezc.coffeesaleapp.models.Order
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.viewmodels.OrderFlowViewModel
+import com.google.android.gms.common.internal.GmsClientEventManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.dialog_additional.*
+import kotlinx.android.synthetic.main.dialog_additional.view.*
 import kotlinx.android.synthetic.main.fragment_payment.*
+import kotlinx.android.synthetic.main.fragment_product_list.*
 
 class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -44,11 +44,20 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var mAddress: Address
 
-    private lateinit var mPaymentType: String
+    private var mPaymentType: String = ""
+
+    private var mQuantityPayment: String = ""
+
+    private lateinit var client: Client
+
+    private var extra_ingredient: String = ""
 
     private val mUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
     private val mDatabaseReference = FirebaseDatabase.getInstance()
             .getReference("clients")
+
+    private val mOrdersDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance()
+            .reference.child("orders")
 
     private var mShowField: Boolean = false
 
@@ -92,9 +101,9 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
             mOrderFlowViewModel.paymentType.observe(this, Observer { paymentType ->
                 this.mPaymentType = paymentType
             })
-            Toast.makeText(context, "Selecciono " + parent.getItemAtPosition(position), Toast.LENGTH_LONG).show()
         } else {
             mBinding.showing = false
+            mOrderFlowViewModel.paymentType.postValue(parent.getItemAtPosition(position).toString())
         }
     }
 
@@ -105,9 +114,34 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // Metodoque cargara la informacion hacia la base de datos
 
     fun onOrder(view: View) {
-        mOrderFlowViewModel.client.observe(this, Observer { client ->
-            Log.i(">>> PaymentFragment: ", "Cantidad efectivo: ${client.name}")
+        mOrderFlowViewModel.effectiveQuantity.postValue(text_quantity_effective.text.toString())
+        mOrderFlowViewModel.effectiveQuantity.observe(this, Observer { quantityPayment ->
+            Log.i("PaymentFragment::: ","Cantidad a pagar: ${quantityPayment}")
+            this.mQuantityPayment = quantityPayment
         })
+
+
+        mOrderFlowViewModel.ingredient.observe(this, Observer { ingredient ->
+            this.extra_ingredient = ingredient
+        })
+
+        mOrderFlowViewModel.client.observe(this, Observer{ client ->
+            this.client = client
+        })
+
+//        val order: Order = Order(this.client, this.mProducts, mAddress, true)
+
+        mOrdersDatabaseReference.push().setValue(
+                Order(
+                        this.client,
+                        this.mProducts,
+                        this.mAddress,
+                        true,
+                        this.extra_ingredient,
+                        this.mPaymentType,
+                        this.mQuantityPayment.let { if(it.isNotEmpty()) it else "0" }
+                ))
+
         Navigation.findNavController(view).navigate(R.id.action_paymentFragment_to_statusOrderFragment2)
     }
 
@@ -116,22 +150,15 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun onAdditionalIngredient(view: View) {
-        val builder = AlertDialog.Builder(context!!)
         val inflater = layoutInflater
-        builder.setTitle("Ingrediente adicional")
         val dialogLayout = inflater.inflate(R.layout.dialog_additional, null)
+        val builder = AlertDialog.Builder(context!!)
         builder.setView(dialogLayout)
-        builder.setPositiveButton("OK") { p0, p1 ->
-
-            //Componer seccion porque no es effectiveQuantity
-            if (text_ingredient.text.toString().isNotEmpty()) {
-                Log.i("PaymentFragment", "No vacio")
-                mOrderFlowViewModel.effectiveQuantity.postValue(Integer.parseInt(text_ingredient.text.toString()))
-            } else {
-                Toast.makeText(context, "Ingrese ingrediente para avanzar..", Toast.LENGTH_LONG).show()
-            }
-        }.setNegativeButton("Cancel") { p0, p1 ->
-            Log.i("PaymentFragment", "Ningun ingrediente")
+        builder.setTitle("Ingrediente adicional")
+        builder.setCancelable(false)
+        builder.setPositiveButton("OK") { dialog, which ->
+            mOrderFlowViewModel.ingredient.postValue(dialogLayout.text_ingredient.text.toString().let { if(it.isNotEmpty()) it else "none" })
+        }.setNegativeButton("Cancel") { dialog, which ->
         }
         builder.show()
     }
