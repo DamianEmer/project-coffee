@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui.views.product
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,8 @@ class DetailProductFragment : Fragment() {
     fun addCart(view: View) {
         mProductViewModel.product.observe(this, Observer {
             it.quantity = Integer.parseInt(text_quantity.text.toString())
+            it.total = (it.quantity * it.price).toFloat()
+            Log.i("DetailProductFragment: ", "Total: ${it.total}")
             mWishViewModel.insertWish(it)
             Toast.makeText(view.context, "Agregado al carrito", Toast.LENGTH_SHORT).show()
         })

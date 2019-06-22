@@ -21,13 +21,14 @@ class Product() : BaseObservable() {
     }
 
     constructor(id: Int = 0, name: String = "", price: Int = 0, image: String = "",
-                description: String = "", quantity: Int = 0) : this() {
+                description: String = "", quantity: Int = 0, total: Float = 0.0f) : this() {
         this.id = id
         this.name = name
         this.price = price
         this.image = image
         this.description = description
         this.quantity = quantity
+        this.total = total
     }
 
     @get:Bindable
@@ -69,4 +70,10 @@ class Product() : BaseObservable() {
         }
 
     var quantity: Int = 0
+
+    @get:Bindable
+    var total: Float = 0.0f
+        set(value){
+            field = value
+        }
 }
