@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+
+    <item
+        android:orderInCategory="100"
+        android:title="@string/action_order_state"
+        app:showAsAction="never" />
 </menu>

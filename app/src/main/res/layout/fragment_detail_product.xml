@@ -74,13 +74,10 @@
             android:id="@+id/text_price"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="72dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="68dp"
             android:text="@{Integer.toString(product.price)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             tools:text="@string/test_price_detail_product" />
 
@@ -158,6 +155,20 @@
                 android:layout_height="wrap_content"
                 android:hint="hint" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="137dp"
+            android:layout_height="125dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/dollar"
+            android:layout_marginTop="72dp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintBottom_toTopOf="@+id/text_description"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            app:layout_constraintEnd_toStartOf="@+id/text_price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
