@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,17 +13,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/colorSecundary</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+    </style>
 
     <!--Theme by Componente or view-->
 
     <style name="AppTheme.LoginScreen" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimary">@color/orangePrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:background">@color/white</item>
         <item name="colorOnBackground">@color/white</item>
-        <item name="android:progressTint">@color/orangePrimary</item>
+        <item name="android:progressTint">@color/colorPrimary</item>
         <item name="materialCardViewStyle">@style/AppTheme.Card</item>
         <item name="textInputStyle">@style/AppTheme.InputLayout</item>
     </style>

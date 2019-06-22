@@ -40,12 +40,8 @@
 
                 <ImageView
                     android:id="@+id/image_product"
-                    android:layout_width="227dp"
-                    android:layout_height="178dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:imageUrl="@{product.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,14 +91,15 @@
             app:layout_constraintTop_toBottomOf="@+id/text_name"
             tools:text="@string/test_description_detail_product" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_addCart"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="42dp"
             android:layout_marginEnd="32dp"
-            android:background="@color/orangePrimary"
+            style="@style/Widget.MaterialComponents.Button"
+            android:background="@color/colorPrimary"
             android:onClick="@{context::addCart}"
             android:text="@string/add_cart_btn"
             android:textColor="@android:color/white"
@@ -153,7 +150,7 @@
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="@string/quantity" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
