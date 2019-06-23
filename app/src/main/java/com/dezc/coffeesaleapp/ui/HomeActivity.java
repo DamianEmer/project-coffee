@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -47,7 +48,14 @@ public class HomeActivity extends AppCompatActivity implements OnProductClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.loginActivity == item.getItemId()) {
             FirebaseAuth.getInstance().signOut();
+            NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(this, R.id.nav_host_home));
+        }else{
+            if (R.id.purchase_status == item.getItemId()){
+                Log.i(">>>> HomeActivity: ", "Ver status");
+                Navigation.findNavController(this, R.id.nav_host_home).navigate(R.id.action_homeFragment_to_statusOrderFragment);
+            }
         }
-        return NavigationUI.onNavDestinationSelected(item, Navigation.findNavController(this, R.id.nav_host_home)) || super.onOptionsItemSelected(item);
+
+        return super.onOptionsItemSelected(item);
     }
 }

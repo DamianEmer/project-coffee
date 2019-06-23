@@ -141,7 +141,7 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         this.mPaymentType,
                         this.mQuantityPayment.let { if(it.isNotEmpty()) it else "0" }
                 ))
-
+        mOrderFlowViewModel.deleteAll()
         Navigation.findNavController(view).navigate(R.id.action_paymentFragment_to_statusOrderFragment2)
     }
 
