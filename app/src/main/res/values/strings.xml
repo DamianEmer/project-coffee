@@ -10,7 +10,7 @@
     <string name="description_logo">Café Andrade</string>
     <string name="description_profile">Profile</string>
     <string name="dollar">$</string>
-    <string name="action_logout">Logout</string>
+    <string name="action_logout">Salir</string>
     <string name="required_field">El %1$s es requerido</string>
 
     <!--Botones-->
