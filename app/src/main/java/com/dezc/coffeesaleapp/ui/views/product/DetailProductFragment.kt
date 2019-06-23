@@ -40,7 +40,7 @@ class DetailProductFragment : Fragment() {
 
     private fun setData(product: Product) {
         mBinding.product = product
-        Glide.with(this).load(R.drawable.coffee).into(image_product)
+        Glide.with(this).load(R.drawable.coffee).override(800,200).into(image_product)
     }
 
     fun addCart(view: View) {

@@ -7,11 +7,12 @@
     <color name="colorBackground">#FFFFFF</color>
 
     <color name="darkGray">#3A3C42</color>
-    <color name="orangePrimary">#FF9717</color>
     <color name="blue">#4E45B2</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="colorPrimary">#f57c00</color>
-    <color name="colorPrimaryLight">#ffad42</color>
-    <color name="colorPrimaryDark">#BB4D00</color>
+    <color name="colorPrimary">#41AB6F</color>
+    <color name="colorPrimaryLight">#66B97A</color>
+    <color name="colorPrimaryDark">#2A6742</color>
+    <color name="colorSecundary">#398E5C</color>
+    <color name="colorSecundaryLight">#B7DBC5</color>
 </resources>
