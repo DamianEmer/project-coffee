@@ -21,3 +21,7 @@ val passwordValidator = fun(passwordLength: Int): Validator = {
 val codePostalValidator = fun(): Validator = {
     it.length == 5
 }
+
+val quantityValidator = fun(lim: Int): Validator = {
+    it.length == lim
+}

@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentLoginScreenBinding
 import com.dezc.coffeesaleapp.models.FormErrors
+import com.dezc.coffeesaleapp.ui.LoginActivity
 import com.dezc.coffeesaleapp.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -53,6 +54,7 @@ class LoginScreenFragment : Fragment() {
         } else {
             mLoginViewModel.login(email, password) {
                 Navigation.findNavController(view).navigate(R.id.action_loginScreenFragment_to_homeActivity)
+
             }
         }
     }
