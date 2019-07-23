@@ -2,28 +2,20 @@ package com.dezc.coffeesaleapp.ui.views.product
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.dezc.coffeesaleapp.R
+import androidx.databinding.DataBindingUtil
+import com.dezc.coffeesaleapp.R.layout.item_category
+import com.dezc.coffeesaleapp.databinding.ItemCategoryBinding
+import com.dezc.coffeesaleapp.ui.utils.commons.adapters.DataBoundRecyclerAdapter
 
-class CategoryRecyclerViewAdapter(private val dataset: Array<String>): RecyclerView.Adapter<CategoryRecyclerViewAdapter.MyViewHolder>() {
+class CategoryRecyclerViewAdapter : DataBoundRecyclerAdapter<String, ItemCategoryBinding>() {
+    override fun createBinding(parent: ViewGroup): ItemCategoryBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_category, parent, false)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryRecyclerViewAdapter.MyViewHolder{
-        val textView = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false) as TextView
-
-        return MyViewHolder(textView)
+    override fun bind(binding: ItemCategoryBinding, item: String, position: Int) {
+        binding.category = item
     }
 
-    override fun getItemCount(): Int {
-        return dataset.size
-    }
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.textView.text = dataset[position]
-    }
-
-
-    class MyViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView){
-
-    }
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
 }

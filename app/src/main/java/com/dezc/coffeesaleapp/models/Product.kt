@@ -12,16 +12,17 @@ import com.dezc.coffeesaleapp.BR
 class Product() : BaseObservable() {
 
     constructor(id: Int = 0, name: String = "", price: Int = 0, image: String = "",
-                description: String = "") : this() {
+                description: String = "", category: String) : this() {
         this.id = id
         this.name = name
         this.price = price
         this.image = image
         this.description = description
+        this.category = category
     }
 
     constructor(id: Int = 0, name: String = "", price: Int = 0, image: String = "",
-                description: String = "", quantity: Int = 0, total: Float = 0.0f) : this() {
+                description: String = "", quantity: Int = 0, total: Float = 0.0f, category: String) : this() {
         this.id = id
         this.name = name
         this.price = price
@@ -29,6 +30,7 @@ class Product() : BaseObservable() {
         this.description = description
         this.quantity = quantity
         this.total = total
+        this.category = category
     }
 
     @get:Bindable
@@ -73,7 +75,10 @@ class Product() : BaseObservable() {
 
     @get:Bindable
     var total: Float = 0.0f
-        set(value){
+        set(value) {
             field = value
+            notifyPropertyChanged(BR.total)
         }
+
+    var category: String = ""
 }

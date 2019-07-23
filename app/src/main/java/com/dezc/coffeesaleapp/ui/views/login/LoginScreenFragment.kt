@@ -34,9 +34,10 @@ class LoginScreenFragment : Fragment() {
         mLoginViewModel = ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
         mLoginViewModel.loginLoading.observe(this, Observer<Boolean> { mBinding.loading = it })
         mLoginViewModel.loginErrors.observe(this, Observer<FormErrors> {
-            when {
-                it.formId == "email" -> requestErrors(email_input_edit_text, it.errorMessage)
-                it.formId == "password" -> requestErrors(password_input_edit_text, it.errorMessage)
+            when(it.formId) {
+                "email" -> requestErrors(email_input_edit_text, it.errorMessage)
+                "password" -> requestErrors(password_input_edit_text, it.errorMessage)
+                "form" -> requestErrors(email_input_edit_text, it.errorMessage)
             }
         })
     }
