@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener

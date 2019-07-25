@@ -36,4 +36,6 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun setCategory(category: String) = mCategory.postValue(category)
+
+    val product = MutableLiveData<Product>()
 }
