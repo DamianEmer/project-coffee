@@ -156,9 +156,9 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
         builder.setView(dialogLayout)
         builder.setTitle("Ingrediente adicional")
         builder.setCancelable(false)
-        builder.setPositiveButton("OK") { dialog, which ->
+        builder.setPositiveButton("OK") { _, _ ->
             mOrderFlowViewModel.ingredient.postValue(dialogLayout.text_ingredient.text.toString().let { if(it.isNotEmpty()) it else "none" })
-        }.setNegativeButton("Cancel") { dialog, which ->
+        }.setNegativeButton("Cancel") { _, _ ->
         }
         builder.show()
     }

@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,34 +9,39 @@ import androidx.lifecycle.Transformations
 import com.dezc.coffeesaleapp.models.Product
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mDatabaseReference = FirebaseDatabase.getInstance()
+    private val mDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance()
             .reference.child("products")
 
     private val mCategory: MutableLiveData<String> = MutableLiveData()
 
-    val products: LiveData<List<Product>> = Transformations.switchMap(mCategory) {
-        val products: MutableLiveData<List<Product>> = MutableLiveData()
-        mDatabaseReference.orderByChild("category").startAt(it).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
+    val product = MutableLiveData<Product>()
 
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                products.postValue(dataSnapshot.children
-                        .filterNotNull()
-                        .map { data -> data.getValue(Product::class.java) }
-                        .filterNotNull())
-            }
-        })
-        return@switchMap products
-    }
+    val products: LiveData<List<Product>> = Transformations
+            .switchMap<String, List<Product>>(mCategory) { getProductsByCategory(it) }
 
     fun setCategory(category: String) = mCategory.postValue(category)
 
-    val product = MutableLiveData<Product>()
+    private fun getProductsByCategory(category: String): LiveData<List<Product>> {
+        Log.i(ProductViewModel::class.simpleName, "Category $category")
+        val products: MutableLiveData<List<Product>> = MutableLiveData()
+        mDatabaseReference.orderByChild("category").startAt(category)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        Log.e(ProductViewModel::class.simpleName, "onCancelled", p0.toException())
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        dataSnapshot.children.forEach { data -> Log.i(ProductViewModel::class.simpleName, "Category $data") }
+                        products.postValue(dataSnapshot.children
+                                .mapNotNull { data -> data.getValue(Product::class.java) })
+                    }
+                })
+        return products
+    }
 }

@@ -12,11 +12,11 @@ abstract class DataBoundFirebaseRecyclerAdapter<T, V : ViewDataBinding>(options:
             = DataBoundViewHolder(createBinding(parent))
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<V>, position: Int, item: T) {
-        bind(holder.binding, position, item)
+        bind(holder.binding, item, position)
         holder.binding.executePendingBindings()
     }
 
     abstract fun createBinding(parent: ViewGroup): V
 
-    abstract fun bind(binding: V, position: Int, item: T)
+    abstract fun bind(binding: V, item: T, position: Int)
 }
