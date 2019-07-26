@@ -65,6 +65,7 @@
     <string name="ingredient">ingrediente...</string>
     <string name="action_order_state">Mi compra</string>
     <string name="quantity">Cantidad</string>
+    <string name="currency">$ %1$d</string>
     <string-array name="payment_array">
         <item>Selecciona</item>
         <item>Efectivo</item>

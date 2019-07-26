@@ -18,7 +18,10 @@
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:cardElevation="3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +32,7 @@
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
                 android:imageUrl="@{product.image}"
@@ -44,19 +47,16 @@
                 android:id="@+id/item_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@{Integer.toString(product.price)}"
+                android:text="@{@string/currency(product.price)}"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/text_dollar"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="@+id/guideline"
-                tools:text="500" />
+                app:layout_constraintVertical_bias="0.25"
+                tools:text="$ 500" />
 
             <TextView
                 android:id="@+id/content"
@@ -68,12 +68,13 @@
                 android:fontFamily="@font/montserrat"
                 android:text="@{product.name}"
                 android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.126"
+                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="Item Name" />
             <!-- TODO center product price-->
 
@@ -90,20 +91,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.3" />
-
-            <TextView
-                android:id="@+id/text_dollar"
-                android:layout_width="9dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/dollar"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline10"
-                app:layout_constraintTop_toTopOf="@+id/guideline" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline10"
