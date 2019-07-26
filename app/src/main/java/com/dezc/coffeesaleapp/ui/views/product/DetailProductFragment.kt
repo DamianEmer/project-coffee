@@ -1,5 +1,6 @@
 package com.dezc.coffeesaleapp.ui.views.product
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.dezc.coffeesaleapp.types.Validators
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
 import com.dezc.coffeesaleapp.types.quantityValidator
+import kotlinx.android.synthetic.main.dialog_additional.view.*
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
 class DetailProductFragment : Fragment() {
@@ -61,5 +63,18 @@ class DetailProductFragment : Fragment() {
         }else {
             Toast.makeText(context, "Ingrese la cantidad", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun onCreateModal(view: View){
+        val inflater = layoutInflater;
+        val dialogLayout = inflater.inflate(R.layout.dialog_additional, null);
+        val builder = AlertDialog.Builder(context!!)
+        builder.setView(dialogLayout);
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK") { dialog, which ->
+
+        }.setNegativeButton("Cancel") { dialog, which ->
+        }
+        builder.show();
     }
 }
