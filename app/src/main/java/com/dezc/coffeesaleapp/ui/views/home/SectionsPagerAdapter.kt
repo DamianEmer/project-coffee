@@ -8,7 +8,7 @@ import com.dezc.coffeesaleapp.ui.views.product.ProductFragment
 import com.dezc.coffeesaleapp.ui.views.profile.ProfileFragment
 import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
 
-class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

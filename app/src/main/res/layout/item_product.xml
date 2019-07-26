@@ -18,11 +18,10 @@
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        app:cardElevation="3dp">
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,6 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
+                android:contentDescription="@{product.name}"
                 android:cropToPadding="true"
                 android:imageUrl="@{product.image}"
                 android:scaleType="centerCrop"
@@ -76,7 +76,6 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Item Name" />
-            <!-- TODO center product price-->
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
