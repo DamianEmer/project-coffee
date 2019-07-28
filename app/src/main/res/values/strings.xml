@@ -62,7 +62,7 @@
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
     <string name="direction">Dirección</string>
-    <string name="ingredient">ingrediente...</string>
+    <string name="additional_note">Notas...</string>
     <string name="action_order_state">Mi compra</string>
     <string name="quantity">Cantidad</string>
     <string name="currency">$ %1$d</string>

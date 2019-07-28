@@ -37,8 +37,8 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="PrimaryButton" parent="Theme.AppCompat">
-        <item name="android:background">@color/colorPrimaryDark</item>
+    <style name="PrimaryButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
 </resources>

@@ -42,7 +42,7 @@ class DetailProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mProductViewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
-        text_quantity.addEditTextValidators(quantityValidators, "Se requiere una cantidad")
+        //text_quantity.addEditTextValidators(quantityValidators, "Se requiere una cantidad")
         mProductViewModel.product.observe(this, Observer { setData(it) })
     }
 
@@ -52,6 +52,8 @@ class DetailProductFragment : Fragment() {
     }
 
     fun addCart(view: View) {
+
+        /**
         if(text_quantity.text.toString().isNotEmpty()){
             mProductViewModel.product.observe(this, Observer {
                 it.quantity = Integer.parseInt(text_quantity.text.toString())
@@ -62,13 +64,14 @@ class DetailProductFragment : Fragment() {
             })
         }else {
             Toast.makeText(context, "Ingrese la cantidad", Toast.LENGTH_SHORT).show()
-        }
+        }**/
     }
 
     fun onCreateModal(view: View){
         val inflater = layoutInflater;
         val dialogLayout = inflater.inflate(R.layout.dialog_additional, null);
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(context!!);
+        builder.setTitle("Notas adicionales");
         builder.setView(dialogLayout);
         builder.setCancelable(true);
         builder.setPositiveButton("OK") { dialog, which ->
@@ -76,5 +79,23 @@ class DetailProductFragment : Fragment() {
         }.setNegativeButton("Cancel") { dialog, which ->
         }
         builder.show();
+    }
+
+    var quantityCount: Int = 0;
+
+    fun onIncrementeCounter(view: View){
+        this.quantityCount++;
+        this.text_layout_quantity.text = this.quantityCount.toString();
+        if(this.quantityCount > 0) this.btn_decrement.isClickable = true;
+    }
+
+    fun onDecrementCouter(view: View) {
+        if(this.quantityCount > 0) {
+            this.quantityCount--;
+            this.text_layout_quantity.text = this.quantityCount.toString();
+        }else {
+            this.btn_decrement.isClickable = false;
+        }
+
     }
 }
