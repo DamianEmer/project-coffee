@@ -20,6 +20,7 @@ import com.dezc.coffeesaleapp.types.Validators
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
 import com.dezc.coffeesaleapp.types.quantityValidator
+import kotlinx.android.synthetic.main.dialog_additional.*
 import kotlinx.android.synthetic.main.dialog_additional.view.*
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
@@ -52,6 +53,12 @@ class DetailProductFragment : Fragment() {
     }
 
     fun addCart(view: View) {
+        if(this.quantityCount >= 1) {
+            val priceTotal: Float = java.lang.Float.parseFloat((mBinding.product!!.price * this.quantityCount).toString());
+            mWishViewModel.addToCart(mBinding.product, "cliente", this.quantityCount, this.additionalNotes, priceTotal);
+        }else {
+            Toast.makeText(view.context, "Ingresa una cantidad", Toast.LENGTH_LONG).show();
+        }
 
         /**
         if(text_quantity.text.toString().isNotEmpty()){
@@ -67,6 +74,8 @@ class DetailProductFragment : Fragment() {
         }**/
     }
 
+    var additionalNotes: String = "";
+
     fun onCreateModal(view: View){
         val inflater = layoutInflater;
         val dialogLayout = inflater.inflate(R.layout.dialog_additional, null);
@@ -75,7 +84,7 @@ class DetailProductFragment : Fragment() {
         builder.setView(dialogLayout);
         builder.setCancelable(true);
         builder.setPositiveButton("OK") { dialog, which ->
-
+            this.additionalNotes = dialogLayout.text_ingredient.text.toString()
         }.setNegativeButton("Cancel") { dialog, which ->
         }
         builder.show();
