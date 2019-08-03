@@ -33,14 +33,12 @@ class WishFragment : Fragment(), OnProductClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mAdapter = WishRecyclerViewAdapter(this)
-        wish_list.adapter = mAdapter
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
-        mWishViewModel.allProducts.observe(this, Observer { products ->
-            products.forEach{
-                a -> Log.i("WishFragment", "${a.name} - ${a.quantity}")
-            }
-            products?.let { mAdapter.replace(it) }
+        mWishViewModel.currentCart.observe(this, Observer{
+            mAdapter = WishRecyclerViewAdapter(
+                    mWishViewModel.getListProductsCart(this),
+                    this)
+            wish_list.adapter = mAdapter
         })
     }
 

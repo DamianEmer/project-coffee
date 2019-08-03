@@ -20,6 +20,8 @@ import com.dezc.coffeesaleapp.types.Validators
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
 import com.dezc.coffeesaleapp.types.quantityValidator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.dialog_additional.*
 import kotlinx.android.synthetic.main.dialog_additional.view.*
 import kotlinx.android.synthetic.main.fragment_detail_product.*
@@ -34,6 +36,8 @@ class DetailProductFragment : Fragment() {
 
     private var quantityValidators: Validators = arrayListOf(quantityValidator(1))
 
+    private val mUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = FragmentDetailProductBinding.inflate(inflater)
         mBinding.context = this
@@ -43,7 +47,7 @@ class DetailProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mProductViewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
-        //text_quantity.addEditTextValidators(quantityValidators, "Se requiere una cantidad")
+//        text_quantity.addEditTextValidators(quantityValidators, "Se requiere una cantidad")
         mProductViewModel.product.observe(this, Observer { setData(it) })
     }
 
@@ -55,23 +59,11 @@ class DetailProductFragment : Fragment() {
     fun addCart(view: View) {
         if(this.quantityCount >= 1) {
             val priceTotal: Float = java.lang.Float.parseFloat((mBinding.product!!.price * this.quantityCount).toString());
+            mWishViewModel.currentUerId.postValue(mUser.uid)
             mWishViewModel.addToCart(mBinding.product, "cliente", this.quantityCount, this.additionalNotes, priceTotal);
         }else {
-            Toast.makeText(view.context, "Ingresa una cantidad", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.context, "Ingresa una cantidad", Toast.LENGTH_LONG).show()
         }
-
-        /**
-        if(text_quantity.text.toString().isNotEmpty()){
-            mProductViewModel.product.observe(this, Observer {
-                it.quantity = Integer.parseInt(text_quantity.text.toString())
-                it.total = (it.quantity * it.price).toFloat()
-                Log.i("DetailProductFragment: ", "Total: ${it.total}")
-                mWishViewModel.insertWish(it)
-                Toast.makeText(view.context, "Agregado al carrito", Toast.LENGTH_SHORT).show()
-            })
-        }else {
-            Toast.makeText(context, "Ingrese la cantidad", Toast.LENGTH_SHORT).show()
-        }**/
     }
 
     var additionalNotes: String = "";

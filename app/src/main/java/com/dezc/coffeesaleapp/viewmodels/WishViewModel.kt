@@ -11,6 +11,10 @@ import com.dezc.coffeesaleapp.db.ProductRoomDatabase
 import com.dezc.coffeesaleapp.models.Client
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.models.ProductCart
+import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +30,11 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
     val allProducts: LiveData<List<Product>>
 
     val deleteLoading: LiveData<Boolean> = mDeleteLoading
+
+    private val mCurrentClient: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+    private val mClientsDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance()
+            .reference.child("clients")
 
     // Firebase for shopping cart
     private val mShoppingCartDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance()
@@ -52,17 +61,21 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private var idPushCart: String = "";
+    val currentCart: MutableLiveData<String> = MutableLiveData()
+
+    val currentUerId: MutableLiveData<String> = MutableLiveData()
 
     fun addToCart(product: Product?, idClient: String, quantity: Int, additionalNotes: String, priceTotal: Float){
-        if(idPushCart.length == 0){
+        if(currentCart.value.toString().length == 0){
             Log.i("WishViewModel -> ", "Se abre un carrito!!")
-            val resultPush: DatabaseReference = mShoppingCartDatabaseReference.push();
-            resultPush.setValue(product);
-            idPushCart= resultPush.key.toString();
+            val resultPush: DatabaseReference = mShoppingCartDatabaseReference.push()
+            resultPush.child("idClient").setValue(mCurrentClient.uid)
+            resultPush.child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
+            mClientsDatabaseReference.child(mCurrentClient.uid).child("currentCart").setValue(resultPush.key.toString())
+            currentCart.postValue(resultPush.key.toString())
         }else{
             Log.i("WishViewModel - ", "Existe un carrito ya!!")
-            mShoppingCartDatabaseReference.child(idPushCart).child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
+            mShoppingCartDatabaseReference.child(currentCart.value.toString()).child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
         }
     }
 
@@ -70,8 +83,13 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun getListProductsCart(){
+    fun getListProductsCart(this_: WishFragment): FirebaseRecyclerOptions<ProductCart>{
+        val options = FirebaseRecyclerOptions.Builder<ProductCart>()
+                .setQuery(mShoppingCartDatabaseReference, ProductCart::class.java)
+                .setLifecycleOwner(this_)
+                .build()
 
+        return options
     }
 
 }

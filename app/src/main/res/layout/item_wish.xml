@@ -13,7 +13,7 @@
 
         <variable
             name="product"
-            type="com.dezc.coffeesaleapp.models.Product" />
+            type="com.dezc.coffeesaleapp.models.ProductCart" />
 
         <variable
             name="onClickListener"
@@ -34,7 +34,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@{product.name}"
+            android:text="@{product.idProduct}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -52,7 +52,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@{Integer.toString((product.price * product.quantity))}"
+            android:text="@{product.priceTotal}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline13"
@@ -69,7 +69,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:onClick="@{() -> onClickListener.onProductClickListener(product)}"
             android:text="X"
             android:theme="@style/PrimaryButton"
             android:visibility="@{deleting ? View.GONE : View.VISIBLE}"
