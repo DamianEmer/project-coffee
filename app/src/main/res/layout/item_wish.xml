@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="android.view.View" />
-
         <variable
             name="deleting"
-            type="boolean" />
+            type="boolean"/>
 
         <variable
             name="product"
-            type="com.dezc.coffeesaleapp.models.ProductCart" />
+            type="com.dezc.coffeesaleapp.models.ProductCart"/>
 
         <variable
             name="onClickListener"
-            type="com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener" />
+            type="com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +49,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@{product.priceTotal}"
+            android:text="@{Float.toString(product.priceTotal)}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline13"
