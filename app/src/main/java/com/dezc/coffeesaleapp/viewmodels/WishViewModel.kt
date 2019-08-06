@@ -61,21 +61,21 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    val currentCart: MutableLiveData<String> = MutableLiveData()
+    var currentCart: String = ""
 
     val currentUerId: MutableLiveData<String> = MutableLiveData()
 
     fun addToCart(product: Product?, idClient: String, quantity: Int, additionalNotes: String, priceTotal: Float){
-        if(currentCart.value.toString().length == 0){
+        if(currentCart.length == 0){
             Log.i("WishViewModel -> ", "Se abre un carrito!!")
             val resultPush: DatabaseReference = mShoppingCartDatabaseReference.push()
             resultPush.child("idClient").setValue(mCurrentClient.uid)
             resultPush.child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
             mClientsDatabaseReference.child(mCurrentClient.uid).child("currentCart").setValue(resultPush.key.toString())
-            currentCart.postValue(resultPush.key.toString())
+            currentCart = resultPush.key.toString()
         }else{
             Log.i("WishViewModel - ", "Existe un carrito ya!!")
-            mShoppingCartDatabaseReference.child(currentCart.value.toString()).child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
+            mShoppingCartDatabaseReference.child(currentCart).child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
         }
     }
 
@@ -84,8 +84,9 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getListProductsCart(this_: WishFragment): FirebaseRecyclerOptions<ProductCart>{
+        val ref = mShoppingCartDatabaseReference.child(currentCart).child("products")
         val options = FirebaseRecyclerOptions.Builder<ProductCart>()
-                .setQuery(mShoppingCartDatabaseReference, ProductCart::class.java)
+                .setQuery(ref, ProductCart::class.java)
                 .setLifecycleOwner(this_)
                 .build()
 

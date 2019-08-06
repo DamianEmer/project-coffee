@@ -24,7 +24,6 @@ class WishRecyclerViewAdapter(
     override fun onBindViewHolder(holder: DataBoundViewHolder<ItemWishBinding>, position: Int, product: ProductCart) {
         holder.binding.onClickListener = mOnProductClickListener
         holder.binding.product = product
-        holder.binding.executePendingBindings()
     }
 
 

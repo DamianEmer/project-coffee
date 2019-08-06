@@ -34,12 +34,10 @@ class WishFragment : Fragment(), OnProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
-        mWishViewModel.currentCart.observe(this, Observer{
-            mAdapter = WishRecyclerViewAdapter(
-                    mWishViewModel.getListProductsCart(this),
-                    this)
-            wish_list.adapter = mAdapter
-        })
+        mAdapter = WishRecyclerViewAdapter(
+                mWishViewModel.getListProductsCart(this),
+                this)
+        wish_list.adapter = mAdapter
     }
 
     fun onSale(view: View) {
