@@ -2,8 +2,6 @@ package com.dezc.coffeesaleapp.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.dezc.coffeesaleapp.db.ProductRepository
 import com.dezc.coffeesaleapp.db.ProductRoomDatabase
 import com.dezc.coffeesaleapp.models.Address
-import com.dezc.coffeesaleapp.models.Client
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.models.ProductCart
 import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
@@ -106,19 +103,14 @@ class WishViewModel(application: Application) : AndroidViewModel(application){
 
     fun getListProductsCart(this_: WishFragment): FirebaseRecyclerOptions<ProductCart>{
         val ref = mShoppingCartDatabaseReference.child(currentCart).child("products")
-        val options = FirebaseRecyclerOptions.Builder<ProductCart>()
+        return FirebaseRecyclerOptions.Builder<ProductCart>()
                 .setQuery(ref, ProductCart::class.java)
                 .setLifecycleOwner(this_)
                 .build()
-
-        return options
     }
 
     fun existCart(): Boolean{
-        if(currentCart.length == 0)
-            return false;
-        else
-            return true
+        return currentCart.isNotEmpty()
     }
 
     fun onOrder(){

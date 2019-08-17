@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
-import com.dezc.coffeesaleapp.ui.views.product.ProductFragment
+import com.dezc.coffeesaleapp.ui.views.product.ProductListFragment
 import com.dezc.coffeesaleapp.ui.views.profile.ProfileFragment
 import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
 
@@ -12,7 +12,7 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, 
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> ProductFragment()
+            0 -> ProductListFragment()
             1 -> WishFragment()
             else -> ProfileFragment()
         }

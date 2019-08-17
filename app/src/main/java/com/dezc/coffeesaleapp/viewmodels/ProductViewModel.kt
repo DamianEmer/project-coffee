@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dezc.coffeesaleapp.models.Category
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.models.ProductCart
 import com.google.firebase.database.DataSnapshot
@@ -19,7 +20,8 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private val mDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance()
             .reference.child("products")
 
-    private val mCategory: MutableLiveData<String> = MutableLiveData()
+    private val mCategory: MutableLiveData<Category> = MutableLiveData()
+    val currentCategory: LiveData<Category> = mCategory
 
     val product = MutableLiveData<Product>()
 
@@ -29,9 +31,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
             .switchMap<ProductCart, Product>(productSelect) { getProductByIdTransformation(it.idProduct)}
 
     val products: LiveData<List<Product>> = Transformations
-            .switchMap<String, List<Product>>(mCategory) { getProductsByCategory(it) }
+            .switchMap<Category, List<Product>>(mCategory) { getProductsByCategory(it.id) }
 
-    fun setCategory(category: String) = mCategory.postValue(category)
+    fun setCategory(category: Category) = mCategory.postValue(category)
 
     private fun getProductsByCategory(category: String): LiveData<List<Product>> {
         Log.i(ProductViewModel::class.simpleName, "Category $category")
@@ -51,9 +53,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         return products
     }
 
-    fun getProductByIdTransformation(productId: String): LiveData<Product>{
-        Log.i(ProductViewModel::class.simpleName, "productID "+productId)
-        val productt: MutableLiveData<Product> = MutableLiveData()
+    private fun getProductByIdTransformation(productId: String): LiveData<Product>{
+        Log.i(ProductViewModel::class.simpleName, "productID $productId")
+        val product: MutableLiveData<Product> = MutableLiveData()
 
         mDatabaseReference.child(productId).addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -62,10 +64,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 Log.i(ProductViewModel::class.simpleName, "value "+dataSnapshot.value)
-                productt.postValue(dataSnapshot.getValue(Product::class.java))
+                product.postValue(dataSnapshot.getValue(Product::class.java))
             }
         })
-
-        return productt
+        return product
     }
 }

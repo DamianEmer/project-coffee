@@ -62,10 +62,10 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (parent!!.getItemAtPosition(position).toString() == "Efectivo") {
             mBinding.showing = true
-            mWishViewModel.typePayment.postValue(parent!!.getItemAtPosition(position).toString())
+            mWishViewModel.typePayment.postValue(parent.getItemAtPosition(position).toString())
         } else {
             mBinding.showing = false
-            mWishViewModel.typePayment.postValue(parent!!.getItemAtPosition(position).toString())
+            mWishViewModel.typePayment.postValue(parent.getItemAtPosition(position).toString())
         }
     }
 

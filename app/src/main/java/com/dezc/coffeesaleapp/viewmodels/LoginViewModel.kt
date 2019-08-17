@@ -47,7 +47,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
                             FormErrors("User does not exist", "email") // TODO User does not exist
                         is FirebaseAuthInvalidCredentialsException ->
                             FormErrors("Invalid password", "password") // TODO Password invalid or User dos not have a password
-                        else -> FormErrors(it.localizedMessage, "form")
+                        else -> FormErrors(it.localizedMessage!!, "form")
                     })
                     loginLoading.postValue(false)
                 }
@@ -63,7 +63,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
                 .addOnFailureListener(this)
                 .addOnSuccessListener { authResult ->
                     signUpProgress.postValue(30)
-                    val storageReference = mClientsStorageReference.child(authResult.user.uid)
+                    val storageReference = mClientsStorageReference.child(authResult.user!!.uid)
                     storageReference.putFile(imageUri)
                             .addOnProgressListener { taskSnapshot ->
                                 signUpProgress.postValue(signUpProgress
@@ -78,7 +78,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
                             }
                             .addOnSuccessListener { uriTask ->
                                 client.profilePhoto = uriTask.toString()
-                                mClientsDatabaseReference.child(authResult.user.uid)
+                                mClientsDatabaseReference.child(authResult.user!!.uid)
                                         .setValue(client)
                                         .addOnCanceledListener(this)
                                         .addOnFailureListener(this)

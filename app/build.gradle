@@ -80,9 +80,9 @@ dependencies {
     implementation "androidx.room:room-guava:$room_version_beta"
 
     // Firebase
-    implementation 'com.google.firebase:firebase-database:18.0.1'
-    implementation 'com.google.firebase:firebase-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-storage:18.1.1'
+    implementation 'com.google.firebase:firebase-database:19.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-storage:19.0.0'
 
     // Firebase UI
     implementation 'com.firebaseui:firebase-ui-database:5.0.0'
@@ -92,6 +92,10 @@ dependencies {
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    // Glide Transformations
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    implementation 'jp.co.cyberagent.android:gpuimage:2.0.0'
 
     // Coroutines
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutines"
