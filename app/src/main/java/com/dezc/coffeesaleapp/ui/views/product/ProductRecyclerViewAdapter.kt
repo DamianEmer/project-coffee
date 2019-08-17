@@ -1,6 +1,5 @@
 package com.dezc.coffeesaleapp.ui.views.product
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -17,7 +16,6 @@ class ProductRecyclerViewAdapter(private val mListener: OnProductClickListener?)
             .inflate(LayoutInflater.from(parent.context), item_product, parent, false)
 
     override fun bind(binding: ItemProductBinding, item: Product, position: Int) {
-        Log.i(ProductRecyclerViewAdapter::class.simpleName, item.name)
         binding.product = item
         binding.listener = mListener
     }

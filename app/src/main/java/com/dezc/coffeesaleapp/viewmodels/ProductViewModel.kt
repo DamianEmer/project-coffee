@@ -28,7 +28,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     val productSelect: MutableLiveData<ProductCart> = MutableLiveData()
 
     val getProductById: LiveData<Product> = Transformations
-            .switchMap<ProductCart, Product>(productSelect) { getProductByIdTransformation(it.idProduct)}
+            .switchMap<ProductCart, Product>(productSelect) { getProductByIdTransformation(it.idProduct) }
 
     val products: LiveData<List<Product>> = Transformations
             .switchMap<Category, List<Product>>(mCategory) { getProductsByCategory(it.id) }
@@ -38,14 +38,13 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private fun getProductsByCategory(category: String): LiveData<List<Product>> {
         Log.i(ProductViewModel::class.simpleName, "Category $category")
         val products: MutableLiveData<List<Product>> = MutableLiveData()
-        mDatabaseReference.orderByChild("category").startAt(category)
+        mDatabaseReference.orderByChild("category").equalTo(category)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         Log.e(ProductViewModel::class.simpleName, "onCancelled", p0.toException())
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        dataSnapshot.children.forEach { data -> Log.i(ProductViewModel::class.simpleName, "Category $data") }
                         products.postValue(dataSnapshot.children
                                 .mapNotNull { data -> data.getValue(Product::class.java) })
                     }
@@ -53,17 +52,16 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         return products
     }
 
-    private fun getProductByIdTransformation(productId: String): LiveData<Product>{
+    private fun getProductByIdTransformation(productId: String): LiveData<Product> {
         Log.i(ProductViewModel::class.simpleName, "productID $productId")
         val product: MutableLiveData<Product> = MutableLiveData()
 
-        mDatabaseReference.child(productId).addListenerForSingleValueEvent(object: ValueEventListener {
+        mDatabaseReference.child(productId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.e(ProductViewModel::class.simpleName, "OnCancelled", p0.toException())
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i(ProductViewModel::class.simpleName, "value "+dataSnapshot.value)
                 product.postValue(dataSnapshot.getValue(Product::class.java))
             }
         })

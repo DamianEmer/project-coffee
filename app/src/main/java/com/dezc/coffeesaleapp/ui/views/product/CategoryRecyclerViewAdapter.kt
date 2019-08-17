@@ -7,10 +7,12 @@ import com.dezc.coffeesaleapp.R.layout.item_category
 import com.dezc.coffeesaleapp.databinding.ItemCategoryBinding
 import com.dezc.coffeesaleapp.models.Category
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnClickListener
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnLoadItem
 import com.dezc.coffeesaleapp.ui.utils.commons.adapters.DataBoundFirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 class CategoryRecyclerViewAdapter(private var onClickListener: OnClickListener<Category>,
+                                  private var onLoadFirstListener: OnLoadItem<Category>,
                                   options: FirebaseRecyclerOptions<Category>) : DataBoundFirebaseRecyclerAdapter<Category, ItemCategoryBinding>(options) {
 
     override fun createBinding(parent: ViewGroup): ItemCategoryBinding {
@@ -24,5 +26,8 @@ class CategoryRecyclerViewAdapter(private var onClickListener: OnClickListener<C
     override fun bind(binding: ItemCategoryBinding, item: Category, position: Int) {
         binding.category = item
         binding.onClickListener = onClickListener
+        if (position == 0){
+            onLoadFirstListener.onLoad(item)
+        }
     }
 }

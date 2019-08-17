@@ -21,6 +21,10 @@
             type="com.dezc.coffeesaleapp.models.Category" />
 
         <variable
+            name="glideTransformations"
+            type="com.bumptech.glide.load.Transformation" />
+
+        <variable
             name="isLoading"
             type="boolean" />
     </data>
@@ -52,9 +56,9 @@
                     android:id="@+id/imageView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:blurImageUrl="@{currentCategory.categoryImage}"
                     android:contentDescription="@{currentCategory.name}"
                     android:cropToPadding="true"
-                    android:imageUrl="@{currentCategory.categoryImage}"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toTopOf="@+id/guideline16"
                     app:layout_constraintEnd_toEndOf="parent"

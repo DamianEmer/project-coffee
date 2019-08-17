@@ -2,6 +2,7 @@ package com.dezc.coffeesaleapp.ui.views.product
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.dezc.coffeesaleapp.databinding.FragmentProductListBinding
 import com.dezc.coffeesaleapp.models.Category
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnClickListener
+import com.dezc.coffeesaleapp.ui.utils.callbacks.OnLoadItem
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 
-class ProductListFragment : Fragment(), OnClickListener<Category> {
+class ProductListFragment : Fragment(), OnClickListener<Category>, OnLoadItem<Category> {
 
     private lateinit var mBinding: FragmentProductListBinding
 
@@ -37,7 +39,7 @@ class ProductListFragment : Fragment(), OnClickListener<Category> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mProductViewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
 
-        mCategoryRecyclerAdapter = CategoryRecyclerViewAdapter(this, FirebaseRecyclerOptions
+        mCategoryRecyclerAdapter = CategoryRecyclerViewAdapter(this, this, FirebaseRecyclerOptions
                 .Builder<Category>()
                 .setQuery(FirebaseDatabase.getInstance().reference.child("categories"), Category::class.java)
                 .setLifecycleOwner(this)
@@ -69,5 +71,10 @@ class ProductListFragment : Fragment(), OnClickListener<Category> {
 
     override fun onClick(p0: Category) {
         mProductViewModel.setCategory(p0)
+    }
+
+    override fun onLoad(item: Category) {
+        Log.i(ProductListFragment::class.simpleName, "Load first item ${item.id}")
+        mProductViewModel.setCategory(item)
     }
 }
