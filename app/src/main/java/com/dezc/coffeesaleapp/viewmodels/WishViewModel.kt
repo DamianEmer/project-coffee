@@ -2,12 +2,15 @@ package com.dezc.coffeesaleapp.viewmodels
 
 import android.app.Application
 import android.util.Log
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dezc.coffeesaleapp.db.ProductRepository
 import com.dezc.coffeesaleapp.db.ProductRoomDatabase
+import com.dezc.coffeesaleapp.models.Address
 import com.dezc.coffeesaleapp.models.Client
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.models.ProductCart
@@ -19,13 +22,30 @@ import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WishViewModel(application: Application) : AndroidViewModel(application) {
+class WishViewModel(application: Application) : AndroidViewModel(application){
 
     private val repository: ProductRepository = ProductRepository(ProductRoomDatabase.getDatabase(application).productDAO())
 
     private val insertLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     private val mDeleteLoading: MutableLiveData<Boolean> = MutableLiveData()
+
+    val address: MutableLiveData<Address> by lazy {
+        MutableLiveData<Address>()
+    }
+
+    val typePayment: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+    val effectiveQuantity: MutableLiveData<Float> by lazy {
+        MutableLiveData<Float>()
+    }
+
+
+    val additionalNotes: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     val allProducts: LiveData<List<Product>>
 
@@ -70,12 +90,13 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
             Log.i("WishViewModel -> ", "Se abre un carrito!!")
             val resultPush: DatabaseReference = mShoppingCartDatabaseReference.push()
             resultPush.child("idClient").setValue(mCurrentClient.uid)
-            resultPush.child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
+            resultPush.child("status").setValue("pending")
+            resultPush.child("products").push().setValue(ProductCart(product!!.id.toString(), quantity, additionalNotes, priceTotal))
             mClientsDatabaseReference.child(mCurrentClient.uid).child("currentCart").setValue(resultPush.key.toString())
             currentCart = resultPush.key.toString()
         }else{
             Log.i("WishViewModel - ", "Existe un carrito ya!!")
-            mShoppingCartDatabaseReference.child(currentCart).child("products").push().setValue(ProductCart(product!!.name, quantity, additionalNotes, priceTotal))
+            mShoppingCartDatabaseReference.child(currentCart).child("products").push().setValue(ProductCart(product!!.id.toString(), quantity, additionalNotes, priceTotal))
         }
     }
 
@@ -91,6 +112,20 @@ class WishViewModel(application: Application) : AndroidViewModel(application) {
                 .build()
 
         return options
+    }
+
+    fun existCart(): Boolean{
+        if(currentCart.length == 0)
+            return false;
+        else
+            return true
+    }
+
+    fun onOrder(){
+        Log.i("WishFragment", "CurrentCart: "+currentCart);
+        mShoppingCartDatabaseReference.child(currentCart).child("typePayment").setValue(typePayment.value)
+        mShoppingCartDatabaseReference.child(currentCart).child("effectiveQuantity").setValue(effectiveQuantity.value)
+        mShoppingCartDatabaseReference.child(currentCart).child("address").setValue(address.value)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dezc.coffeesaleapp.ui.utils.callbacks;
 
 import com.dezc.coffeesaleapp.models.Product;
+import com.dezc.coffeesaleapp.models.ProductCart;
 
 /**
  * This interface must be implemented by activities that contain this
@@ -14,4 +15,6 @@ import com.dezc.coffeesaleapp.models.Product;
  */
 public interface OnProductClickListener {
     void onProductClickListener(Product item);
+
+    void onProductCartClickListener(ProductCart item);
 }

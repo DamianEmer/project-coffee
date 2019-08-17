@@ -15,14 +15,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 
 class WishRecyclerViewAdapter(
         options: FirebaseRecyclerOptions<ProductCart>,
-        private val mOnProductClickListener: OnProductClickListener
+        private val mOnProductClickListener: OnProductClickListener?
 ) : FirebaseRecyclerAdapter<ProductCart, DataBoundViewHolder<ItemWishBinding>>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<ItemWishBinding> =
         DataBoundViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), item_wish, parent, false))
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<ItemWishBinding>, position: Int, product: ProductCart) {
-        holder.binding.onClickListener = mOnProductClickListener
+        holder.binding.listener = mOnProductClickListener
         holder.binding.product = product
     }
 

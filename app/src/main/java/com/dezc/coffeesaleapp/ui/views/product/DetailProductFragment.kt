@@ -16,6 +16,7 @@ import com.dezc.coffeesaleapp.databinding.FragmentDetailProductBinding
 import com.dezc.coffeesaleapp.functions.addEditTextValidators
 import com.dezc.coffeesaleapp.functions.isNotEmpty
 import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.models.ProductCart
 import com.dezc.coffeesaleapp.types.Validators
 import com.dezc.coffeesaleapp.viewmodels.ProductViewModel
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
@@ -34,8 +35,6 @@ class DetailProductFragment : Fragment() {
 
     private lateinit var mBinding: FragmentDetailProductBinding
 
-    private var quantityValidators: Validators = arrayListOf(quantityValidator(1))
-
     private val mUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,8 +46,22 @@ class DetailProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mProductViewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
-//        text_quantity.addEditTextValidators(quantityValidators, "Se requiere una cantidad")
         mProductViewModel.product.observe(this, Observer { setData(it) })
+
+        mProductViewModel.getProductById.observe(this, Observer { Log.i(DetailProductFragment::class.simpleName, "product: "+ it.name) })
+
+        mProductViewModel.productSelect.observe(this, Observer { setDataEditable(it) })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("DetailProductFragment", "----> onPauseActive")
+        mProductViewModel.productSelect.removeObserver {  }
+    }
+
+    private fun setDataEditable(productCart: ProductCart) {
+        Log.i(DetailProductFragment::class.simpleName, "productCart: "+ productCart.idProduct)
+        mBinding.productCart = productCart
     }
 
     private fun setData(product: Product) {
@@ -58,9 +71,9 @@ class DetailProductFragment : Fragment() {
 
     fun addCart(view: View) {
         if(this.quantityCount >= 1) {
-            val priceTotal: Float = java.lang.Float.parseFloat((mBinding.product!!.price * this.quantityCount).toString());
+            val priceTotal: Float = java.lang.Float.parseFloat((mBinding.product!!.price * this.quantityCount).toString())
             mWishViewModel.currentUerId.postValue(mUser.uid)
-            mWishViewModel.addToCart(mBinding.product, "cliente", this.quantityCount, this.additionalNotes, priceTotal);
+            mWishViewModel.addToCart(mBinding.product, "cliente", this.quantityCount, this.additionalNotes, priceTotal)
         }else {
             Toast.makeText(view.context, "Ingresa una cantidad", Toast.LENGTH_LONG).show()
         }
@@ -97,6 +110,13 @@ class DetailProductFragment : Fragment() {
         }else {
             this.btn_decrement.isClickable = false;
         }
-
     }
+
+    fun isExistQuantity(view: View, value: Int):Int {
+        if(value != 0)
+            return value
+        else
+            return 0;
+    }
+
 }

@@ -16,9 +16,20 @@
             type="com.dezc.coffeesaleapp.models.ProductCart"/>
 
         <variable
-            name="onClickListener"
+            name="listener"
             type="com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener"/>
     </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="@{() -> listener.onProductCartClickListener(product)}"
+        app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -104,4 +115,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="229dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

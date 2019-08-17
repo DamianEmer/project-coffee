@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.models.ProductCart
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -21,6 +22,11 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private val mCategory: MutableLiveData<String> = MutableLiveData()
 
     val product = MutableLiveData<Product>()
+
+    val productSelect: MutableLiveData<ProductCart> = MutableLiveData()
+
+    val getProductById: LiveData<Product> = Transformations
+            .switchMap<ProductCart, Product>(productSelect) { getProductByIdTransformation(it.idProduct)}
 
     val products: LiveData<List<Product>> = Transformations
             .switchMap<String, List<Product>>(mCategory) { getProductsByCategory(it) }
@@ -43,5 +49,23 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
                     }
                 })
         return products
+    }
+
+    fun getProductByIdTransformation(productId: String): LiveData<Product>{
+        Log.i(ProductViewModel::class.simpleName, "productID "+productId)
+        val productt: MutableLiveData<Product> = MutableLiveData()
+
+        mDatabaseReference.child(productId).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.e(ProductViewModel::class.simpleName, "OnCancelled", p0.toException())
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Log.i(ProductViewModel::class.simpleName, "value "+dataSnapshot.value)
+                productt.postValue(dataSnapshot.getValue(Product::class.java))
+            }
+        })
+
+        return productt
     }
 }
