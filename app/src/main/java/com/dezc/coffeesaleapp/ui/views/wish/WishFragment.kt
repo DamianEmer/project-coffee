@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentWishListBinding
 import com.dezc.coffeesaleapp.models.Product
+import com.dezc.coffeesaleapp.models.ProductCart
 import com.dezc.coffeesaleapp.ui.utils.callbacks.OnProductClickListener
 import com.dezc.coffeesaleapp.viewmodels.WishViewModel
 import kotlinx.android.synthetic.main.fragment_wish_list.*
@@ -67,3 +68,4 @@ class WishFragment : Fragment() {
         mListener = null
     }
 }
+

@@ -17,4 +17,6 @@ public interface OnProductClickListener {
     void onProductClickListener(Product item);
 
     void onProductCartClickListener(ProductCart item);
+
+    void onProductCartDeleteClickListener(ProductCart item);
 }

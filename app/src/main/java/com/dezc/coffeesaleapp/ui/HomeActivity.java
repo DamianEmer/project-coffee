@@ -48,6 +48,12 @@ public class HomeActivity extends AppCompatActivity implements OnProductClickLis
     }
 
     @Override
+    public void onProductCartDeleteClickListener(ProductCart item) {
+        Log.i("HomeActivity", "DELETE......");
+        mWishViewModel.onDeleteProductCart(item.getIdCart());
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;

@@ -48,7 +48,11 @@
     <fragment
         android:id="@+id/detailProductFragment"
         android:name="com.dezc.coffeesaleapp.ui.views.product.DetailProductFragment"
-        android:label="DetailProductFragment" />
+        android:label="DetailProductFragment" >
+        <action
+            android:id="@+id/action_detailProductFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <activity
         android:id="@+id/loginActivity"
         android:name="com.dezc.coffeesaleapp.ui.LoginActivity"

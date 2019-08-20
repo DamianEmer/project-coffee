@@ -10,6 +10,9 @@
         <variable name="showing"
             type="boolean"/>
 
+        <variable name="effectiveQuantity"
+            type="com.dezc.coffeesaleapp.models.EffectiveQuantity"/>
+
       <variable
           name="context"
           type="com.dezc.coffeesaleapp.ui.views.payment.PaymentFragment"/>
@@ -76,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="Cantidad..."/>
+                android:text="@={effectiveQuantity.effectiveQuantity}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

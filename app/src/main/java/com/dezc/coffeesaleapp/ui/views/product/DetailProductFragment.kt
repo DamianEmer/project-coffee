@@ -1,6 +1,8 @@
 package com.dezc.coffeesaleapp.ui.views.product
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.dezc.coffeesaleapp.R
 import com.dezc.coffeesaleapp.databinding.FragmentDetailProductBinding
 import com.dezc.coffeesaleapp.functions.addEditTextValidators
+import com.dezc.coffeesaleapp.functions.getSupportFragmentManager
 import com.dezc.coffeesaleapp.functions.isNotEmpty
 import com.dezc.coffeesaleapp.models.Product
 import com.dezc.coffeesaleapp.models.ProductCart
@@ -25,6 +30,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.dialog_additional.*
 import kotlinx.android.synthetic.main.dialog_additional.view.*
+import kotlinx.android.synthetic.main.dialog_confirm.*
+import kotlinx.android.synthetic.main.dialog_confirm.view.*
+import kotlinx.android.synthetic.main.dialog_confirm.view.dialog_confirm
 import kotlinx.android.synthetic.main.fragment_detail_product.*
 
 class DetailProductFragment : Fragment() {
@@ -47,9 +55,6 @@ class DetailProductFragment : Fragment() {
         mProductViewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         mWishViewModel = ViewModelProviders.of(activity!!).get(WishViewModel::class.java)
         mProductViewModel.product.observe(this, Observer { setData(it) })
-
-        mProductViewModel.getProductById.observe(this, Observer { Log.i(DetailProductFragment::class.simpleName, "product: "+ it.name) })
-
         mProductViewModel.productSelect.observe(this, Observer { setDataEditable(it) })
     }
 
@@ -72,8 +77,7 @@ class DetailProductFragment : Fragment() {
     fun addCart(view: View) {
         if(this.quantityCount >= 1) {
             val priceTotal: Float = java.lang.Float.parseFloat((mBinding.product!!.price * this.quantityCount).toString())
-            mWishViewModel.currentUerId.postValue(mUser.uid)
-            mWishViewModel.addToCart(mBinding.product, "cliente", this.quantityCount, this.additionalNotes, priceTotal)
+            this.onDialogConfirm(view, priceTotal)
         }else {
             Toast.makeText(view.context, "Ingresa una cantidad", Toast.LENGTH_LONG).show()
         }
@@ -89,7 +93,7 @@ class DetailProductFragment : Fragment() {
         builder.setView(dialogLayout);
         builder.setCancelable(true);
         builder.setPositiveButton("OK") { dialog, which ->
-            this.additionalNotes = dialogLayout.text_ingredient.text.toString()
+            this.additionalNotes = dialogLayout.text_ingredient.text.toString().trim()
         }.setNegativeButton("Cancel") { dialog, which ->
         }
         builder.show();
@@ -117,6 +121,29 @@ class DetailProductFragment : Fragment() {
             return value
         else
             return 0;
+    }
+
+    fun onDialogConfirm(view: View, priceTotal: Float){
+        val builder: Dialog = Dialog(context!!)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.dialog_confirm, null)
+        builder.setContentView(dialogLayout)
+        builder.setCancelable(false)
+        dialogLayout.btn_close_popuup.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                builder.dismiss()
+            }
+
+        })
+        dialogLayout.btn_accept_popup.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                mWishViewModel.currentUerId.postValue(mUser.uid)
+                mWishViewModel.addToCart(mBinding.product, "cliente", quantityCount, additionalNotes, priceTotal)
+                builder.dismiss()
+                Navigation.findNavController(view).navigate(R.id.action_detailProductFragment_to_homeFragment)
+            }
+        })
+        builder.show()
     }
 
 }

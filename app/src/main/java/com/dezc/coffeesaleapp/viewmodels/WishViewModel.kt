@@ -88,17 +88,21 @@ class WishViewModel(application: Application) : AndroidViewModel(application){
             val resultPush: DatabaseReference = mShoppingCartDatabaseReference.push()
             resultPush.child("idClient").setValue(mCurrentClient.uid)
             resultPush.child("status").setValue("pending")
-            resultPush.child("products").push().setValue(ProductCart(product!!.id.toString(), quantity, additionalNotes, priceTotal))
+            resultPush.child("idOrder").setValue(resultPush.key)
+            val resultPushProduct:DatabaseReference = resultPush.child("products").push()
+            resultPushProduct.setValue(ProductCart(resultPushProduct.key.toString(), product!!.id.toString(), quantity, additionalNotes, priceTotal))
             mClientsDatabaseReference.child(mCurrentClient.uid).child("currentCart").setValue(resultPush.key.toString())
             currentCart = resultPush.key.toString()
         }else{
             Log.i("WishViewModel - ", "Existe un carrito ya!!")
-            mShoppingCartDatabaseReference.child(currentCart).child("products").push().setValue(ProductCart(product!!.id.toString(), quantity, additionalNotes, priceTotal))
+            val resultPushProduct: DatabaseReference = mShoppingCartDatabaseReference.child(currentCart).child("products").push()
+            resultPushProduct.setValue(ProductCart(resultPushProduct.key.toString(), product!!.id.toString(), quantity, additionalNotes, priceTotal))
         }
     }
 
-    fun onDeleteProductCart(idProduct: String){
-
+    fun onDeleteProductCart(idProductCart: String){
+        Log.i("WishViewModel", "Elimando el -> "+idProductCart)
+        mShoppingCartDatabaseReference.child(currentCart).child("products").child(idProductCart).removeValue()
     }
 
     fun getListProductsCart(this_: WishFragment): FirebaseRecyclerOptions<ProductCart>{
@@ -115,9 +119,13 @@ class WishViewModel(application: Application) : AndroidViewModel(application){
 
     fun onOrder(){
         Log.i("WishFragment", "CurrentCart: "+currentCart);
+//        val updateStatus: Map<String, String> = HashMap<String, String>()
+//        updateStatus.put("status","active")
         mShoppingCartDatabaseReference.child(currentCart).child("typePayment").setValue(typePayment.value)
-        mShoppingCartDatabaseReference.child(currentCart).child("effectiveQuantity").setValue(effectiveQuantity.value)
+//        mShoppingCartDatabaseReference.child(currentCart).child("effectiveQuantity").setValue(effectiveQuantity.value)
         mShoppingCartDatabaseReference.child(currentCart).child("address").setValue(address.value)
+        mShoppingCartDatabaseReference.child(currentCart).child("status").setValue("active")
+        currentCart = ""
     }
 
 }

@@ -81,6 +81,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
             android:text="X"
+            android:onClick="@{() -> listener.onProductCartDeleteClickListener(product)}"
             android:theme="@style/PrimaryButton"
             android:visibility="@{deleting ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
