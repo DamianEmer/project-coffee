@@ -96,18 +96,18 @@ class DetailProductFragment : Fragment() {
             this.additionalNotes = dialogLayout.text_ingredient.text.toString().trim()
         }.setNegativeButton("Cancel") { dialog, which ->
         }
-        builder.show();
+        builder.show()
     }
 
     var quantityCount: Int = 0;
 
-    fun onIncrementeCounter(view: View){
+    fun onIncrementCounter(view: View){
         this.quantityCount++;
         this.text_layout_quantity.text = this.quantityCount.toString();
         if(this.quantityCount > 0) this.btn_decrement.isClickable = true;
     }
 
-    fun onDecrementCouter(view: View) {
+    fun onDecrementCounter(view: View) {
         if(this.quantityCount > 0) {
             this.quantityCount--;
             this.text_layout_quantity.text = this.quantityCount.toString();
@@ -117,32 +117,25 @@ class DetailProductFragment : Fragment() {
     }
 
     fun isExistQuantity(view: View, value: Int):Int {
-        if(value != 0)
-            return value
+        return if(value != 0)
+            value
         else
-            return 0;
+            0
     }
 
-    fun onDialogConfirm(view: View, priceTotal: Float){
+    private fun onDialogConfirm(view: View, priceTotal: Float){
         val builder: Dialog = Dialog(context!!)
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.dialog_confirm, null)
         builder.setContentView(dialogLayout)
         builder.setCancelable(false)
-        dialogLayout.btn_close_popuup.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(p0: View?) {
-                builder.dismiss()
-            }
-
-        })
-        dialogLayout.btn_accept_popup.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(p0: View?) {
-                mWishViewModel.currentUerId.postValue(mUser.uid)
-                mWishViewModel.addToCart(mBinding.product, "cliente", quantityCount, additionalNotes, priceTotal)
-                builder.dismiss()
-                Navigation.findNavController(view).navigate(R.id.action_detailProductFragment_to_homeFragment)
-            }
-        })
+        dialogLayout.btn_close_popuup.setOnClickListener { builder.dismiss() }
+        dialogLayout.btn_accept_popup.setOnClickListener {
+            mWishViewModel.currentUerId.postValue(mUser.uid)
+            mWishViewModel.addToCart(mBinding.product, "cliente", quantityCount, additionalNotes, priceTotal)
+            builder.dismiss()
+            Navigation.findNavController(view).navigate(R.id.action_detailProductFragment_to_homeFragment)
+        }
         builder.show()
     }
 

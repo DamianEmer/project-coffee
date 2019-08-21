@@ -67,6 +67,8 @@
     <string name="quantity">Cantidad</string>
     <string name="currency">$ %1$d</string>
     <string name="message_positive_popup">Se ha agregado al carrito</string>
+    <string name="action_minus">-</string>
+    <string name="action_plus">+</string>
     <string-array name="payment_array">
         <item>Selecciona</item>
         <item>Efectivo</item>
