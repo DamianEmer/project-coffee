@@ -1,9 +1,10 @@
 package com.dezc.coffeesaleapp.models
 
 import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import com.dezc.coffeesaleapp.BR
 
-class Address(): BaseObservable() {
+class Address() : BaseObservable() {
 
     constructor(street: String = "",
                 codePostal: Int = 0,
@@ -11,7 +12,7 @@ class Address(): BaseObservable() {
                 interiorNumber: Int = 0,
                 suburb: String = "",
                 city: String = "",
-                town: String = ""):this(){
+                town: String = "") : this() {
         this.street = street
         this.codePostal = codePostal
         this.outdoorNumber = outdoorNumber
@@ -21,45 +22,52 @@ class Address(): BaseObservable() {
         this.town = town
     }
 
+    @get:Bindable
     var street: String = ""
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.street)
+            notifyPropertyChanged(BR.street)
         }
 
+    @get:Bindable
     var codePostal: Int = 0
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.codePostal)
+            notifyPropertyChanged(BR.codePostal)
         }
 
+    @get:Bindable
     var outdoorNumber: Int = 0
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.outdoorNumber)
+            notifyPropertyChanged(BR.outdoorNumber)
         }
 
+    @get:Bindable
     var interiorNumber: Int = 0
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.interiorNumber)
+            notifyPropertyChanged(BR.interiorNumber)
         }
 
+    @get:Bindable
     var suburb: String = ""
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.suburb)
+            notifyPropertyChanged(BR.suburb)
         }
 
+    @get:Bindable
     var city: String = ""
         set(value) {
             field = value
-            //notifyPropertyChanged(BR.city)
+            notifyPropertyChanged(BR.city)
         }
 
+    @get:Bindable
     var town: String = ""
-        set(value){
+        set(value) {
             field = value
-            //notifyPropertyChanged(BR.town)
+            notifyPropertyChanged(BR.town)
         }
 }

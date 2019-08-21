@@ -1,6 +1,8 @@
 package com.dezc.coffeesaleapp.models
 
 import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import com.dezc.coffeesaleapp.BR
 
 class Order(): BaseObservable() {
 
@@ -22,38 +24,52 @@ class Order(): BaseObservable() {
         this.quantityPayment = quantityPayment
     }
 
+    @get:Bindable
     var client: Client = Client()
         set(value) {
             field = value
+            notifyPropertyChanged(BR.client)
         }
 
+    @get:Bindable
     var products: List<Product> = ArrayList<Product>()
         set(value) {
             field = value
+            notifyPropertyChanged(BR.products)
         }
 
+    @get:Bindable
     var address: Address = Address()
         set(value) {
             field = value
+            notifyPropertyChanged(BR.address)
         }
 
+    @get:Bindable
     var orderStatus: Boolean = false
         set(value) {
             field = value
+            notifyPropertyChanged(BR.orderStatus)
         }
 
+    @get:Bindable
     var ingredient: String = ""
         set(value){
             field = value
+            notifyPropertyChanged(BR.ingredient)
         }
 
+    @get:Bindable
     var typePayment: String = ""
         set(value){
             field = value
+            notifyPropertyChanged(BR.typePayment)
         }
 
+    @get:Bindable
     var quantityPayment: String = ""
         set(value) {
             field = value
+            notifyPropertyChanged(BR.quantityPayment)
         }
 }
