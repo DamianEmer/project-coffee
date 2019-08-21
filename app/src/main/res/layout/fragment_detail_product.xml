@@ -3,31 +3,206 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="context"
-            type="com.dezc.coffeesaleapp.ui.views.product.DetailProductFragment" />
-
-        <variable
-            name="product"
-            type="com.dezc.coffeesaleapp.models.Product" />
-
-        <variable
-            name="productCart"
-            type="com.dezc.coffeesaleapp.models.ProductCart" />
-
-        <variable
-            name="loading"
-            type="boolean" />
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".ui.views.product.DetailProductFragment">
+
+                <ImageView
+                    android:id="@+id/btn_additional_note"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:contentDescription="@string/action_add_note"
+                    android:gravity="center"
+                    android:onClick="@{context::onCreateModal}"
+                    android:padding="8dp"
+                    android:src="@drawable/icon_comment"
+                    android:tint="@color/colorPrimaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/button_addCart"
+                    app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="@{loading ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description"
+                    app:layout_constraintVertical_bias="0.806" />
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="72dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@{product.name ?? @string/test_name_detail_product}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintHorizontal_bias="0.24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/test_name_detail_product" />
+
+                <TextView
+                    android:id="@+id/text_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="72dp"
+                    android:layout_marginEnd="68dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@{Integer.toString(product.price)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/test_price_detail_product" />
+
+                <TextView
+                    android:id="@+id/text_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:fontFamily="@font/montserrat"
+                    android:justificationMode="inter_word"
+                    android:text="@{product.description ?? @string/test_description_detail_product}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_name"
+                    tools:targetApi="o"
+                    tools:text="@string/test_description_detail_product" />
+
+                <TextView
+                    android:id="@+id/text_layout_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="32dp"
+                    android:text='@{Integer.toString((productCart != null)? productCart.quantity >= 1 ? productCart.quantity : 0 : 0)}'
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/dollar"
+                    app:layout_constraintBottom_toTopOf="@+id/text_description"
+                    app:layout_constraintEnd_toStartOf="@+id/text_price"
+                    app:layout_constraintHorizontal_bias="0.951"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.727" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="529dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_addCart"
+                    style="@style/PrimaryButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:onClick="@{context::addCart}"
+                    android:text="@string/add_cart_btn"
+                    android:textColor="@android:color/white"
+                    android:visibility="@{!loading ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_additional_note"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_decrement"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/round_button"
+                    android:onClick="@{context::onDecrementCounter}"
+                    android:text="@string/action_minus"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
+                    app:layout_constraintEnd_toStartOf="@+id/text_layout_quantity"
+                    app:layout_constraintHorizontal_bias="0.574"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_increment"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:onClick="@{context::onIncrementCounter}"
+                    android:text="@string/action_plus"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.482"
+                    app:layout_constraintStart_toEndOf="@+id/text_layout_quantity"
+                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
@@ -72,197 +247,26 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".ui.views.product.DetailProductFragment">
-
-                <TextView
-                    android:id="@+id/text_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="72dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@{product.name ?? @string/test_name_detail_product}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                    app:layout_constraintHorizontal_bias="0.24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/test_name_detail_product" />
-
-                <TextView
-                    android:id="@+id/text_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
-                    android:layout_marginEnd="68dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@{Integer.toString(product.price)}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/test_price_detail_product" />
-
-                <TextView
-                    android:id="@+id/text_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:fontFamily="@font/montserrat"
-                    android:justificationMode="inter_word"
-                    android:text="@{product.description ?? @string/test_description_detail_product}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_name"
-                    tools:text="@string/test_description_detail_product" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_addCart"
-                    style="@style/PrimaryButton"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/montserrat"
-                    android:onClick="@{context::addCart}"
-                    android:text="@string/add_cart_btn"
-                    android:textColor="@android:color/white"
-                    android:visibility="@{!loading ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_additional_note"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline14" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_additional_note"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:gravity="center"
-                    android:onClick="@{context::onCreateModal}"
-                    app:icon="@drawable/icon_comment"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/button_addCart"
-                    app:layout_constraintTop_toTopOf="@+id/guideline14" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar2"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:visibility="@{loading ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_description"
-                    app:layout_constraintVertical_bias="0.806" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_decrement"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:background="@drawable/round_button"
-                    android:onClick="@{context::onDecrementCounter}"
-                    android:text="@string/action_minus"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
-                    app:layout_constraintEnd_toStartOf="@+id/text_layout_quantity"
-                    app:layout_constraintHorizontal_bias="0.574"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
-
-                <TextView
-                    android:id="@+id/text_layout_quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="32dp"
-                    android:text='@{Integer.toString((productCart != null)? productCart.quantity >= 1 ? productCart.quantity : 0 : 0)}'
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_increment"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:onClick="@{context::onIncrementCounter}"
-                    android:text="@string/action_plus"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.482"
-                    app:layout_constraintStart_toEndOf="@+id/text_layout_quantity"
-                    app:layout_constraintTop_toBottomOf="@+id/text_description" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/dollar"
-                    app:layout_constraintBottom_toTopOf="@+id/text_description"
-                    app:layout_constraintEnd_toStartOf="@+id/text_price"
-                    app:layout_constraintHorizontal_bias="0.951"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.727" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="529dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="context"
+            type="com.dezc.coffeesaleapp.ui.views.product.DetailProductFragment" />
+
+        <variable
+            name="product"
+            type="com.dezc.coffeesaleapp.models.Product" />
+
+        <variable
+            name="productCart"
+            type="com.dezc.coffeesaleapp.models.ProductCart" />
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
 </layout>

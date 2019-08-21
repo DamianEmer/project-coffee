@@ -62,13 +62,15 @@
     <string name="add_cart_btn">Agregar a carrito</string>
     <string name="title_activity_maps">Map</string>
     <string name="direction">Dirección</string>
-    <string name="additional_note">Notas...</string>
+    <string name="additional_note">Notas…</string>
     <string name="action_order_state">Mi compra</string>
     <string name="quantity">Cantidad</string>
     <string name="currency">$ %1$d</string>
     <string name="message_positive_popup">Se ha agregado al carrito</string>
     <string name="action_minus">-</string>
     <string name="action_plus">+</string>
+    <string name="msg_extra_ingredient">Extra Ingredient</string>
+    <string name="action_add_note">Add cook notes</string>
     <string-array name="payment_array">
         <item>Selecciona</item>
         <item>Efectivo</item>
