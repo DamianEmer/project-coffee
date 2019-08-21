@@ -1,4 +1,4 @@
-package com.dezc.coffeesaleapp.ui.views.product
+package com.dezc.coffeesaleapp.ui.views.product.list
 
 import android.content.Context
 import android.os.Bundle

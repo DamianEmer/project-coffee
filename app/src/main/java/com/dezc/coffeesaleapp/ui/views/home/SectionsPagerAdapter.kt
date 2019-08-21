@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
-import com.dezc.coffeesaleapp.ui.views.product.ProductListFragment
+import com.dezc.coffeesaleapp.ui.views.product.list.ProductListFragment
 import com.dezc.coffeesaleapp.ui.views.profile.ProfileFragment
 import com.dezc.coffeesaleapp.ui.views.wish.WishFragment
 

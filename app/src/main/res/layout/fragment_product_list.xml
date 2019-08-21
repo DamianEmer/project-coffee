@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.views.product.ProductListFragment">
+    tools:context=".ui.views.product.list.ProductListFragment">
 
     <data>
 
@@ -10,11 +10,11 @@
 
         <variable
             name="categoryAdapter"
-            type="com.dezc.coffeesaleapp.ui.views.product.CategoryRecyclerViewAdapter" />
+            type="com.dezc.coffeesaleapp.ui.views.product.list.CategoryRecyclerViewAdapter" />
 
         <variable
             name="productAdapter"
-            type="com.dezc.coffeesaleapp.ui.views.product.ProductRecyclerViewAdapter" />
+            type="com.dezc.coffeesaleapp.ui.views.product.list.ProductRecyclerViewAdapter" />
 
         <variable
             name="currentCategory"
