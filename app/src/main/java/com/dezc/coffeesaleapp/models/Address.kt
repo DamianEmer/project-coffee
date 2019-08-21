@@ -15,7 +15,7 @@ class Address(): BaseObservable() {
         this.street = street
         this.codePostal = codePostal
         this.outdoorNumber = outdoorNumber
-        this.interiorrNumber = interiorNumber
+        this.interiorNumber = interiorNumber
         this.suburb = suburb
         this.city = city
         this.town = town
@@ -39,7 +39,7 @@ class Address(): BaseObservable() {
             //notifyPropertyChanged(BR.outdoorNumber)
         }
 
-    var interiorrNumber: Int = 0
+    var interiorNumber: Int = 0
         set(value) {
             field = value
             //notifyPropertyChanged(BR.interiorNumber)

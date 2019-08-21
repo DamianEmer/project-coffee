@@ -51,12 +51,12 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreateView (inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         mBinding = FragmentPaymentBinding.inflate(inflater)
         mBinding.context = this
-        mBinding.effectiveQuantity!!.addOnPropertyChangedCallback(object: Observable.OnPropertyChangedCallback(){
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-               
-            }
-
-        })
+//        mBinding.effectiveQuantity!!.addOnPropertyChangedCallback(object: Observable.OnPropertyChangedCallback(){
+//            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+//
+//            }
+//
+//        })
         return mBinding.root
     }
 
@@ -100,7 +100,7 @@ class PaymentFragment : Fragment(), AdapterView.OnItemSelectedListener {
         builder.setTitle("Ingrediente adicional")
         builder.setCancelable(false)
         builder.setPositiveButton("OK") { _, _ ->
-            mWishViewModel.additionalNotes.postValue(dialogLayout.text_ingredient.text.toString()
+            mWishViewModel.additionalNotes.postValue(dialogLayout.text_ingredient.text.toString().trim()
                     .let { if(it.isNotEmpty()) it else "none" })
         }.setNegativeButton("Cancel") { _, _ ->
         }

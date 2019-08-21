@@ -124,6 +124,7 @@ class WishViewModel(application: Application) : AndroidViewModel(application){
         mShoppingCartDatabaseReference.child(currentCart).child("typePayment").setValue(typePayment.value)
 //        mShoppingCartDatabaseReference.child(currentCart).child("effectiveQuantity").setValue(effectiveQuantity.value)
         mShoppingCartDatabaseReference.child(currentCart).child("address").setValue(address.value)
+        mShoppingCartDatabaseReference.child(currentCart).child("additionalNote").setValue(additionalNotes.value)
         mShoppingCartDatabaseReference.child(currentCart).child("status").setValue("active")
         currentCart = ""
     }
